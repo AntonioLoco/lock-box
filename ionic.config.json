@@ -1,0 +1,7 @@
+{
+  "name": "LockBox",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
