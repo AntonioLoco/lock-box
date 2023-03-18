@@ -14,7 +14,7 @@ import {
 import React, { useState } from "react";
 import useStorage from "../../hooks/useStorage";
 
-const SliderPage: React.FC = () => {
+export const HomePage: React.FC = () => {
   const { accounts, createAccount, deleteAccount } = useStorage();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -74,7 +74,7 @@ const SliderPage: React.FC = () => {
                   deleteAccount(account.id);
                 }}
               >
-                Elimina
+                X
               </IonButton>
             </IonItem>
           ))}
@@ -83,5 +83,3 @@ const SliderPage: React.FC = () => {
     </IonPage>
   );
 };
-
-export default SliderPage;
