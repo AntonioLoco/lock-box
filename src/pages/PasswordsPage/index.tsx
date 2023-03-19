@@ -8,11 +8,12 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React from "react";
-import useStorage from "../../hooks/useStorage";
+import { useGlobalContext } from "../../hooks/useGlobalContext";
+import useStorage, { AccountItem } from "../../hooks/useStorage";
 
-export const PasswordsPage: React.FC = () => {
-  const { accounts, deleteAccount } = useStorage();
+export const PasswordsPage = () => {
+  const { saveStoreAccounts } = useStorage();
+  const { AccountsState } = useGlobalContext();
 
   return (
     <IonPage>
@@ -24,14 +25,18 @@ export const PasswordsPage: React.FC = () => {
       <IonContent className="ion-padding">
         <h2>Lista degli Account</h2>
         <IonList>
-          {accounts.map((account) => (
+          {AccountsState.accounts.map((account) => (
             <IonItem key={account.id}>
               <h2>Account: {account.website}</h2>
               <h4>Email: {account.email}</h4>
               <h4>Password: {account.password}</h4>
               <IonButton
                 onClick={() => {
-                  deleteAccount(account.id);
+                  const updatedAccounts = AccountsState.accounts.filter(
+                    (item) => item.id !== account.id
+                  );
+                  AccountsState.setAccounts(updatedAccounts);
+                  saveStoreAccounts(updatedAccounts);
                 }}
               >
                 X

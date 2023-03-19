@@ -12,7 +12,7 @@ const useStorage = () => {
     const [store, setStore] = useState<Storage>();
     const [loading, setLoading] = useState(true);
     const [pinCode, setPinCode] = useState<string | null>("");
-    const [accounts, setAccounts] = useState<AccountItem[]>([]);
+    const [StoreAccounts, setStoreAccounts] = useState<AccountItem[]>([]);
 
     useEffect(() => {
         setLoading(true);
@@ -27,7 +27,7 @@ const useStorage = () => {
             setPinCode(storePinCode);
 
             const storedAccounts = await store.get("accounts") || [];
-            setAccounts(storedAccounts);
+            setStoreAccounts(storedAccounts);
 
             setLoading(false);
         }
@@ -42,25 +42,12 @@ const useStorage = () => {
         }
 
         // ACCOUNTS ACTION
-        const createAccount = async (email: string, password: string, website: string) => {
-            const newAccount = {
-                id: new Date().getTime(),
-                email,
-                password,
-                website
-            }
-            const updatedAccounts = [...accounts, newAccount];
-            setAccounts(updatedAccounts);
+        const saveStoreAccounts = async (updatedAccounts: AccountItem[]) => {
+            setStoreAccounts(updatedAccounts);
             store?.set("accounts", updatedAccounts);
         }
 
-        const deleteAccount = async (id: number) => {
-            const updatedAccounts = accounts.filter((account) => account.id !== id);
-            setAccounts(updatedAccounts);
-            store?.set("accounts", updatedAccounts)
-        }
-
-        return { loading, pinCode, createPinCode, accounts, createAccount, deleteAccount };
+        return { loading, pinCode, createPinCode, StoreAccounts,saveStoreAccounts };
 }
 
 export default useStorage

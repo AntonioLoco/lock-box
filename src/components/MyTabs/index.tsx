@@ -14,7 +14,7 @@ import {
   lockClosedOutline,
   logOutOutline,
 } from "ionicons/icons";
-import React from "react";
+import React, { useState } from "react";
 
 //Router
 import { Redirect, Route, useHistory } from "react-router";

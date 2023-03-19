@@ -11,31 +11,41 @@ import "./theme/variables.scss";
 //Storage
 import useStorage from "./hooks/useStorage";
 
+//Global Context
+import { MyGlobalContext } from "./hooks/useGlobalContext";
+
 //Pages
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { MyTabs } from "./components/MyTabs";
 import { useState } from "react";
+import { IntroPage } from "./pages/IntroPage";
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  const { pinCode, loading } = useStorage();
-
+  const { pinCode, loading, StoreAccounts } = useStorage();
+  const [accounts, setAccounts] = useState(StoreAccounts);
   return (
-    <IonApp>
-      <IonReactRouter>
-        <IonRouterOutlet>
-          <Route exact path="/">
-            {loading ? "Loading" : pinCode ? <LoginPage /> : <RegisterPage />}
-          </Route>
+    <MyGlobalContext.Provider
+      value={{ AccountsState: { accounts, setAccounts } }}
+    >
+      <IonApp>
+        <IonReactRouter>
+          <IonRouterOutlet>
+            <Route exact path="/">
+              {loading ? "Loading" : pinCode ? <LoginPage /> : <IntroPage />}
+            </Route>
 
-          <Route path="/app">
-            <MyTabs />
-          </Route>
-        </IonRouterOutlet>
-      </IonReactRouter>
-    </IonApp>
+            <Route path="/register" component={RegisterPage} />
+
+            <Route path="/app">
+              <MyTabs />
+            </Route>
+          </IonRouterOutlet>
+        </IonReactRouter>
+      </IonApp>
+    </MyGlobalContext.Provider>
   );
 };
 

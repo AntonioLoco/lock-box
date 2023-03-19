@@ -1,0 +1,43 @@
+.intro-page{
+    text-align: center;
+    --padding-top: 40px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 60px;
+
+    .container{
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .logo h1{
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--ion-color-light);
+    }
+
+    .description {
+        text-align: start;
+        h2{
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--ion-color-light);
+        }
+    }
+
+    .btn-started{
+        width: 100%;
+        --padding-top: 15px;
+        --padding-bottom: 15px;
+        --border-radius: 20px;
+        --background: #25262B;
+        font-size: 1.5rem;
+        font-weight: 700;
+        --color: var(--ion-color-light);
+    }
+}

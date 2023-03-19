@@ -10,17 +10,27 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
-import useStorage from "../../hooks/useStorage";
+import { useGlobalContext } from "../../hooks/useGlobalContext";
+import useStorage, { AccountItem } from "../../hooks/useStorage";
 
-export const AddAccountPage: React.FC = () => {
-  const { createAccount } = useStorage();
+export const AddAccountPage = () => {
+  const { saveStoreAccounts } = useStorage();
+  const { AccountsState } = useGlobalContext();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [webSite, setWebSite] = useState("");
 
   const handleAdd = async () => {
-    await createAccount(email, password, webSite);
+    const newAccount: AccountItem = {
+      id: new Date().getTime(),
+      email,
+      password,
+      website: webSite,
+    };
+    const updateAccounts = [...AccountsState.accounts, newAccount];
+    AccountsState.setAccounts(updateAccounts);
+    await saveStoreAccounts(updateAccounts);
     setEmail("");
     setPassword("");
     setWebSite("");
