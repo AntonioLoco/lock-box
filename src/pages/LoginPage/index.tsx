@@ -21,7 +21,7 @@ export const LoginPage: React.FC = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     if (pin === pinCode) {
-      history.push("/home");
+      history.push("/app");
       setPin("");
     }
   };

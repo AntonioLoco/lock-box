@@ -12,9 +12,10 @@ import "./theme/variables.scss";
 import useStorage from "./hooks/useStorage";
 
 //Pages
-import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
+import { MyTabs } from "./components/MyTabs";
+import { useState } from "react";
 
 setupIonicReact();
 
@@ -29,7 +30,9 @@ const App: React.FC = () => {
             {loading ? "Loading" : pinCode ? <LoginPage /> : <RegisterPage />}
           </Route>
 
-          <Route exact path="/home" component={HomePage} />
+          <Route path="/app">
+            <MyTabs />
+          </Route>
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>

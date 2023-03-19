@@ -21,7 +21,7 @@ export const RegisterPage: React.FC = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     createPinCode(pin);
-    history.push("/home");
+    history.push("/app");
     setPin("");
   };
 

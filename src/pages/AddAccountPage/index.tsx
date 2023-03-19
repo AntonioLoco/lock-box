@@ -1,4 +1,3 @@
-import "./index.scss";
 import {
   IonButton,
   IonContent,
@@ -6,7 +5,6 @@ import {
   IonInput,
   IonItem,
   IonLabel,
-  IonList,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -14,8 +12,9 @@ import {
 import React, { useState } from "react";
 import useStorage from "../../hooks/useStorage";
 
-export const HomePage: React.FC = () => {
-  const { accounts, createAccount, deleteAccount } = useStorage();
+export const AddAccountPage: React.FC = () => {
+  const { createAccount } = useStorage();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [webSite, setWebSite] = useState("");
@@ -26,12 +25,11 @@ export const HomePage: React.FC = () => {
     setPassword("");
     setWebSite("");
   };
-
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Page Title</IonTitle>
+          <IonTitle>Add Account</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
@@ -61,24 +59,6 @@ export const HomePage: React.FC = () => {
           />
         </IonItem>
         <IonButton onClick={handleAdd}>Aggiungi</IonButton>
-
-        <h2>Lista degli Account</h2>
-        <IonList>
-          {accounts.map((account) => (
-            <IonItem key={account.id}>
-              <h2>Account: {account.website}</h2>
-              <h4>Email: {account.email}</h4>
-              <h4>Password: {account.password}</h4>
-              <IonButton
-                onClick={() => {
-                  deleteAccount(account.id);
-                }}
-              >
-                X
-              </IonButton>
-            </IonItem>
-          ))}
-        </IonList>
       </IonContent>
     </IonPage>
   );
