@@ -60,7 +60,7 @@ const useStorage = () => {
             store?.set("accounts", updatedAccounts)
         }
 
-        return { loading, pinCode, createPinCode , accounts, createAccount, deleteAccount };
+        return { loading, pinCode, createPinCode, accounts, createAccount, deleteAccount };
 }
 
 export default useStorage
