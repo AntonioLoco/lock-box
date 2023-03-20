@@ -34,9 +34,16 @@ const App: React.FC = () => {
         <IonReactRouter>
           <IonRouterOutlet>
             <Route exact path="/">
-              {loading ? "Loading" : pinCode ? <LoginPage /> : <IntroPage />}
+              {loading ? (
+                "Loading"
+              ) : pinCode ? (
+                <Redirect to="/login" />
+              ) : (
+                <IntroPage />
+              )}
             </Route>
 
+            <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
 
             <Route path="/app">

@@ -1,0 +1,56 @@
+.auth-page{
+    display: flex;
+    flex-direction: column;
+    .header-page{
+        width: 100%;
+        height: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        h1{
+            font-weight: bold;
+            color: white;
+            margin: 0;
+            text-align: center;
+        }
+    }
+    .container{
+        width: 100%;
+        height: 85%;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        background-color: white;
+        padding: 2em 1em;
+
+        .pin{
+            text-align: center;
+            font-size: 1.5rem;
+            color: black;
+            margin-top: 50px;
+            margin-bottom: 100px;
+
+            span{
+                margin: 0 10px;
+                position: relative;
+
+                &.letter::after{
+                    content: "";
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 100%;
+                    background-color: black;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            ion-note{
+                font-size: 1rem;
+            }
+        }
+    }
+}

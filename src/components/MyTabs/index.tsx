@@ -60,7 +60,7 @@ export const MyTabs: React.FC = () => {
                   text: "Logout",
                   role: "confirm",
                   handler: () => {
-                    history.push("/");
+                    history.push("/login");
                   },
                 },
               ],

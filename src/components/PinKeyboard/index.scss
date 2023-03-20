@@ -1,0 +1,13 @@
+.pinKeyboard{
+    text-align: center;
+
+    ion-button{
+        font-size: 1.3rem;
+        --border-style: none;
+        --border-radius: 50%;
+
+        &.backspace-button{
+        --border-radius: 10px;
+        }
+    }
+}
