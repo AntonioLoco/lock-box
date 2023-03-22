@@ -1,4 +1,5 @@
 .intro-page{
+    --background: radial-gradient(circle, rgba(134, 61, 246, 1) 0%, rgba(86, 102, 247, 1) 100%);
     text-align: center;
     --padding-top: 40px;
     --padding-start: 20px;
@@ -32,12 +33,10 @@
 
     .btn-started{
         width: 100%;
-        --padding-top: 15px;
-        --padding-bottom: 15px;
+        height: 50px;
         --border-radius: 20px;
         --background: #25262B;
-        font-size: 1.5rem;
-        font-weight: 700;
+        font-size: 1.2rem;
         --color: var(--ion-color-light);
     }
 }

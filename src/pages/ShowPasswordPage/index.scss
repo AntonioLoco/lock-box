@@ -22,7 +22,7 @@
             border-top-left-radius: 30px;
             border-top-right-radius: 30px;
             background-color: white;
-            padding: 1em 1em 2em;
+            padding: 6em 1em 2em;
             position: relative;
 
             .photo{
@@ -44,10 +44,54 @@
                     object-fit: contain;
                 }
             }
+
+            ion-item{
+                --background: #f4f4f5;
+                --border-style: none;
+                border-radius: 20px;
+                margin-bottom: 1.5em;
+                position: relative;
+
+                h3{
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                }
+
+                p{
+                    color: var(--ion-color-medium-shade);
+                    font-size: 1rem;
+                }
+
+                .buttons{
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+
+                    ion-button{
+                        --box-shadow: none;
+                        --border-style: none;
+                    }
+                }
+            }
         }
 
     ion-fab-button{
         --background: none;
         --box-shadow: none;
+    }
+
+    ion-fab.edit-button{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        ion-button{
+            --background: #25262b;
+            font-size: 1rem;
+            width: 80%;
+            height: 50px;
+            --border-radius: 20px;
+            margin-bottom: 2em;
+        }
     }
 }
