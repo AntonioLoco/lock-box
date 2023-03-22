@@ -40,7 +40,7 @@ export const PasswordsPage = () => {
                   <h2>{account.website}</h2>
                   <h6>{account.email}</h6>
                 </IonLabel>
-                <IonIcon icon={chevronForwardOutline} slot="end" />
+                {/* <IonIcon icon={chevronForwardOutline} slot="end" /> */}
               </IonItem>
             ))}
           </IonList>

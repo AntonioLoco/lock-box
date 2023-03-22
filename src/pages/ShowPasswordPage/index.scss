@@ -8,7 +8,7 @@
             height: 20%;
             display: flex;
             justify-content: center;
-            padding-top: 2.5em;
+            padding-top: 1em;
             h1 {
                 font-size: 2rem;
                 color: white;
@@ -95,3 +95,30 @@
         }
     }
 }
+
+    .edit-modal{
+        --background: radial-gradient(circle, rgba(134, 61, 246, 1) 0%, rgba(86, 102, 247, 1) 100%);
+        header {
+            width: 100%;
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            padding-top: 1em;
+    
+            h1 {
+                font-size: 2rem;
+                color: white;
+                margin: 0;
+            }
+        }
+
+        main{
+            width: 100%;
+            height: 90%;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            background-color: white;
+            padding: 1em;
+            position: relative;
+        }
+    }
