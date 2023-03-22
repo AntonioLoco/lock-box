@@ -1,6 +1,6 @@
 import "../RegisterPage/index.scss";
 import { IonContent, IonNote, IonPage } from "@ionic/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import PinKeyboard from "../../components/PinKeyboard";
 import useStorage from "../../hooks/useStorage";
@@ -10,13 +10,6 @@ export const LoginPage: React.FC = () => {
   const history = useHistory();
   const [pin, setPin] = useState("");
   const [errorPin, setErrorPin] = useState(false);
-  // const handleSubmit = (event: any) => {
-  //   event.preventDefault();
-  //   if (pin === pinCode) {
-  //     history.push("/app");
-  //     setPin("");
-  //   }
-  // };
 
   useEffect(() => {
     if (pin.length === 1 && errorPin) {

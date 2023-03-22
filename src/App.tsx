@@ -9,7 +9,7 @@ import "./general.scss";
 import "./theme/variables.scss";
 
 //Storage
-import useStorage from "./hooks/useStorage";
+import useStorage, { AccountItem } from "./hooks/useStorage";
 
 //Global Context
 import { MyGlobalContext } from "./hooks/useGlobalContext";
@@ -18,14 +18,21 @@ import { MyGlobalContext } from "./hooks/useGlobalContext";
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { MyTabs } from "./components/MyTabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IntroPage } from "./pages/IntroPage";
 
 setupIonicReact();
 
 const App: React.FC = () => {
   const { pinCode, loading, StoreAccounts } = useStorage();
-  const [accounts, setAccounts] = useState(StoreAccounts);
+  const [accounts, setAccounts] = useState<AccountItem[]>([]);
+
+  useEffect(() => {
+    if (!loading) {
+      setAccounts(StoreAccounts);
+    }
+  }, [loading]);
+
   return (
     <MyGlobalContext.Provider
       value={{ AccountsState: { accounts, setAccounts } }}

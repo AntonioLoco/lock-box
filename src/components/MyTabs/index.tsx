@@ -22,6 +22,7 @@ import { Redirect, Route, useHistory } from "react-router";
 // Pages
 import { PasswordsPage } from "../../pages/PasswordsPage";
 import { AddAccountPage } from "../../pages/AddAccountPage";
+import ShowPasswordPage from "../../pages/ShowPasswordPage";
 
 export const MyTabs: React.FC = () => {
   const [presentAlert] = useIonAlert();
@@ -31,6 +32,7 @@ export const MyTabs: React.FC = () => {
     <IonTabs>
       <IonRouterOutlet>
         <Route path="/app/passwords" component={PasswordsPage} />
+        <Route path="/app/password/:id" component={ShowPasswordPage} />
         <Route path="/app/add-account" component={AddAccountPage} />
         <Route exact path="/app">
           <Redirect to="/app/passwords" />

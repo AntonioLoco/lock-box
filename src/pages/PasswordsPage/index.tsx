@@ -1,49 +1,50 @@
+import "./index.scss";
 import {
   IonButton,
   IonContent,
-  IonHeader,
+  IonIcon,
   IonItem,
+  IonLabel,
   IonList,
   IonPage,
-  IonTitle,
-  IonToolbar,
+  IonSearchbar,
+  IonThumbnail,
 } from "@ionic/react";
 import { useGlobalContext } from "../../hooks/useGlobalContext";
-import useStorage, { AccountItem } from "../../hooks/useStorage";
+import { chevronForwardOutline } from "ionicons/icons";
 
 export const PasswordsPage = () => {
-  const { saveStoreAccounts } = useStorage();
   const { AccountsState } = useGlobalContext();
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Passwords Page</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        <h2>Lista degli Account</h2>
-        <IonList>
-          {AccountsState.accounts.map((account) => (
-            <IonItem key={account.id}>
-              <h2>Account: {account.website}</h2>
-              <h4>Email: {account.email}</h4>
-              <h4>Password: {account.password}</h4>
-              <IonButton
-                onClick={() => {
-                  const updatedAccounts = AccountsState.accounts.filter(
-                    (item) => item.id !== account.id
-                  );
-                  AccountsState.setAccounts(updatedAccounts);
-                  saveStoreAccounts(updatedAccounts);
-                }}
+      <IonContent className="passwords-page">
+        <header>
+          <h1>My Passwords</h1>
+        </header>
+        <main>
+          <IonSearchbar className="search-bar"></IonSearchbar>
+          <IonList>
+            {AccountsState.accounts.map((account) => (
+              <IonItem
+                key={account.id}
+                routerLink={`/app/password/${account.id}`}
               >
-                X
-              </IonButton>
-            </IonItem>
-          ))}
-        </IonList>
+                <IonThumbnail slot="start">
+                  <img
+                    alt={account.website}
+                    src={`https://besticon-demo.herokuapp.com/icon?url=${account.linkWebsite}&size=80..120..200`}
+                  />
+                </IonThumbnail>
+                <IonLabel>
+                  <h2>{account.website}</h2>
+                  <h6>{account.email}</h6>
+                </IonLabel>
+                <IonIcon icon={chevronForwardOutline} slot="end" />
+              </IonItem>
+            ))}
+          </IonList>
+        </main>
       </IonContent>
     </IonPage>
   );

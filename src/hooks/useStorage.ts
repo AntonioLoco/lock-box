@@ -2,10 +2,11 @@ import { useEffect, useState } from "react"
 import { Storage } from "@ionic/storage";
 
 export interface AccountItem {
-    id: number,
+    id: string,
     email: string,
     password: string,
-    website: string
+    website: string,
+    linkWebsite: string
 }
 
 const useStorage = () => {
@@ -47,7 +48,7 @@ const useStorage = () => {
             store?.set("accounts", updatedAccounts);
         }
 
-        return { loading, pinCode, createPinCode, StoreAccounts,saveStoreAccounts };
+        return { loading, pinCode, createPinCode, StoreAccounts, saveStoreAccounts};
 }
 
 export default useStorage

@@ -20,13 +20,15 @@ export const AddAccountPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [webSite, setWebSite] = useState("");
+  const [linkWebsite, setLinkWebsite] = useState("");
 
   const handleAdd = async () => {
     const newAccount: AccountItem = {
-      id: new Date().getTime(),
+      id: new Date().getTime() + "",
       email,
       password,
       website: webSite,
+      linkWebsite,
     };
     const updateAccounts = [...AccountsState.accounts, newAccount];
     AccountsState.setAccounts(updateAccounts);
@@ -34,6 +36,7 @@ export const AddAccountPage = () => {
     setEmail("");
     setPassword("");
     setWebSite("");
+    setLinkWebsite("");
   };
   return (
     <IonPage>
@@ -63,9 +66,17 @@ export const AddAccountPage = () => {
         <IonItem>
           <IonLabel position="floating">Password</IonLabel>
           <IonInput
-            placeholder="Inserisci l'email"
+            placeholder="Inserisci la tua password"
             value={password}
             onIonChange={(e) => setPassword(e.detail.value!)}
+          />
+        </IonItem>
+        <IonItem>
+          <IonLabel position="floating">Link WebSite</IonLabel>
+          <IonInput
+            placeholder="www.facebook.com"
+            value={linkWebsite}
+            onIonChange={(e) => setLinkWebsite(e.detail.value!)}
           />
         </IonItem>
         <IonButton onClick={handleAdd}>Aggiungi</IonButton>
