@@ -33,8 +33,8 @@ const ShowPasswordPage: React.FC = () => {
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
   const { AccountsState } = useGlobalContext();
-  const accountShow = AccountsState.accounts.filter(
-    (account) => account.id == id
+  const [accountShow, setAccountsShow] = useState(
+    AccountsState.accounts.filter((account) => account.id == id)
   );
   const { saveStoreAccounts } = useStorage();
   const [showPassword, setShowPassword] = useState(false);
@@ -51,7 +51,6 @@ const ShowPasswordPage: React.FC = () => {
   const [editModal, setEditModal] = useState(false);
   const [editToast] = useIonToast();
 
-  //Form
   const [website, setWebsite] = useState(accountShow[0].website);
   const [linkWebsite, setLinkWebsite] = useState(accountShow[0].linkWebsite);
   const [email, setEmail] = useState(accountShow[0].email);
