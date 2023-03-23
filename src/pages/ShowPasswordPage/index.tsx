@@ -59,7 +59,7 @@ const ShowPasswordPage: React.FC = () => {
   const printHiddenPassword = (length: number) => {
     return Array(length)
       .fill("")
-      .map((index) => {
+      .map((_, index) => {
         return <span key={index}>*</span>;
       });
   };
