@@ -1,28 +1,31 @@
+import "./index.scss";
 import {
   IonButton,
   IonContent,
-  IonHeader,
   IonInput,
   IonItem,
   IonLabel,
   IonPage,
-  IonTitle,
-  IonToolbar,
+  useIonToast,
 } from "@ionic/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useGlobalContext } from "../../hooks/useGlobalContext";
 import useStorage, { AccountItem } from "../../hooks/useStorage";
+import { useHistory } from "react-router";
 
 export const AddAccountPage = () => {
   const { saveStoreAccounts } = useStorage();
   const { AccountsState } = useGlobalContext();
+  const history = useHistory();
+  const [successToast] = useIonToast();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [webSite, setWebSite] = useState("");
   const [linkWebsite, setLinkWebsite] = useState("");
 
-  const handleAdd = async () => {
+  const handleAdd = async (e: any) => {
+    e.preventDefault();
     const newAccount: AccountItem = {
       id: new Date().getTime() + "",
       email,
@@ -30,8 +33,15 @@ export const AddAccountPage = () => {
       website: webSite,
       linkWebsite,
     };
-    const updateAccounts = [...AccountsState.accounts, newAccount];
+    const updateAccounts = [newAccount, ...AccountsState.accounts];
     AccountsState.setAccounts(updateAccounts);
+    history.push("/app/passwords");
+    successToast({
+      message: `Account ${webSite} aggiunto!`,
+      duration: 2000,
+      position: "top",
+      color: "success",
+    });
     await saveStoreAccounts(updateAccounts);
     setEmail("");
     setPassword("");
@@ -40,46 +50,62 @@ export const AddAccountPage = () => {
   };
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Add Account</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        <h1>Crea un Account</h1>
-        <IonItem>
-          <IonLabel position="floating">Nome Piattaforma</IonLabel>
-          <IonInput
-            placeholder="Inserisci l'email"
-            value={webSite}
-            onIonChange={(e) => setWebSite(e.detail.value!)}
-          />
-        </IonItem>
-        <IonItem>
-          <IonLabel position="floating">Email</IonLabel>
-          <IonInput
-            placeholder="Inserisci l'email"
-            value={email}
-            onIonChange={(e) => setEmail(e.detail.value!)}
-          />
-        </IonItem>
-        <IonItem>
-          <IonLabel position="floating">Password</IonLabel>
-          <IonInput
-            placeholder="Inserisci la tua password"
-            value={password}
-            onIonChange={(e) => setPassword(e.detail.value!)}
-          />
-        </IonItem>
-        <IonItem>
-          <IonLabel position="floating">Link WebSite</IonLabel>
-          <IonInput
-            placeholder="www.facebook.com"
-            value={linkWebsite}
-            onIonChange={(e) => setLinkWebsite(e.detail.value!)}
-          />
-        </IonItem>
-        <IonButton onClick={handleAdd}>Aggiungi</IonButton>
+      <IonContent className="add-account-page">
+        <header>
+          <h1>Aggiungi un Account</h1>
+        </header>
+        <main>
+          <form onSubmit={(e) => handleAdd(e)}>
+            {/* Name Account */}
+            <IonItem>
+              <IonLabel position="stacked">
+                <h1>Name</h1>
+              </IonLabel>
+              <IonInput
+                placeholder="es. Facebook"
+                value={webSite}
+                onIonChange={(e) => setWebSite(e.detail.value!)}
+              ></IonInput>
+            </IonItem>
+
+            {/* Link Website */}
+            <IonItem>
+              <IonLabel position="stacked">
+                <h1>Link Web</h1>
+              </IonLabel>
+              <IonInput
+                placeholder="es. www.facebook.com"
+                value={linkWebsite}
+                onIonChange={(e) => setLinkWebsite(e.detail.value!)}
+              ></IonInput>
+            </IonItem>
+
+            {/* Email or Username */}
+            <IonItem>
+              <IonLabel position="stacked">
+                <h1>Email or Username</h1>
+              </IonLabel>
+              <IonInput
+                placeholder="Inserisci la tua email o username"
+                value={email}
+                onIonChange={(e) => setEmail(e.detail.value!)}
+              ></IonInput>
+            </IonItem>
+
+            <IonItem>
+              <IonLabel position="stacked">
+                <h1>Password</h1>
+              </IonLabel>
+              <IonInput
+                placeholder="Inserisci o genera la tua password"
+                value={password}
+                onIonChange={(e) => setPassword(e.detail.value!)}
+              ></IonInput>
+            </IonItem>
+
+            <IonButton type="submit">Save</IonButton>
+          </form>
+        </main>
       </IonContent>
     </IonPage>
   );
