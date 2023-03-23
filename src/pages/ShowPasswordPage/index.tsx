@@ -258,7 +258,9 @@ const ShowPasswordPage: React.FC = () => {
                   >
                     {/* Name Account */}
                     <IonItem>
-                      <IonLabel position="stacked">Name</IonLabel>
+                      <IonLabel position="stacked">
+                        <h1>Name</h1>
+                      </IonLabel>
                       <IonInput
                         value={website}
                         onIonChange={(e) => setWebsite(e.detail.value!)}
@@ -267,7 +269,9 @@ const ShowPasswordPage: React.FC = () => {
 
                     {/* Link Website */}
                     <IonItem>
-                      <IonLabel position="stacked">Link Web</IonLabel>
+                      <IonLabel position="stacked">
+                        <h1>Link Web</h1>
+                      </IonLabel>
                       <IonInput
                         value={linkWebsite}
                         onIonChange={(e) => setLinkWebsite(e.detail.value!)}
@@ -276,7 +280,9 @@ const ShowPasswordPage: React.FC = () => {
 
                     {/* Email or Username */}
                     <IonItem>
-                      <IonLabel position="stacked">Email or Username</IonLabel>
+                      <IonLabel position="stacked">
+                        <h1>Email or Username</h1>
+                      </IonLabel>
                       <IonInput
                         value={email}
                         onIonChange={(e) => setEmail(e.detail.value!)}
@@ -284,7 +290,9 @@ const ShowPasswordPage: React.FC = () => {
                     </IonItem>
 
                     <IonItem>
-                      <IonLabel position="stacked">Password</IonLabel>
+                      <IonLabel position="stacked">
+                        <h1>Password</h1>
+                      </IonLabel>
                       <IonInput
                         value={password}
                         onIonChange={(e) => setPassword(e.detail.value!)}

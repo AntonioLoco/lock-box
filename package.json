@@ -5,10 +5,12 @@
   "dependencies": {
     "@capacitor/android": "4.7.1",
     "@capacitor/app": "4.1.1",
+    "@capacitor/clipboard": "^4.1.0",
     "@capacitor/core": "4.7.1",
     "@capacitor/haptics": "4.1.0",
     "@capacitor/keyboard": "4.1.1",
     "@capacitor/status-bar": "4.1.1",
+    "@fontsource/poppins": "^4.5.10",
     "@ionic/react": "^6.0.0",
     "@ionic/react-router": "^6.0.0",
     "@ionic/storage": "^3.0.6",

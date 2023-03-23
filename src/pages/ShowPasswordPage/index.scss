@@ -120,5 +120,44 @@
             background-color: white;
             padding: 1em;
             position: relative;
+            text-align: center;
+
+            ion-item{
+                width: 100%;
+                margin-bottom: 1.5em;
+                --border-style:none;
+                
+                ion-label{
+                    h1{
+                        font-weight: bold;
+                        font-size: 1.5em;
+                    }
+                }
+
+                ion-input{
+                    margin-top: 10px;
+                    border: 1.5px solid #25262B;
+                    border-radius: 15px;
+                    --padding-top: 15px!important;
+                    --padding-bottom: 15px!important;
+                    --padding-start: 10px!important;
+                    --padding-end: 10px!important;
+                }   
+            }
+
+            ion-button[type="submit"]{
+                width: 90%;
+                height: 50px;
+                --border-radius: 15px;
+                --background: #25262B;
+                margin-top: 20px;
+            }
+        }
+
+        ion-fab{
+            ion-fab-button{
+                --background: none;
+                --box-shadow: none;
+            }
         }
     }
