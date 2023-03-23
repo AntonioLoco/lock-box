@@ -110,6 +110,7 @@ const ShowPasswordPage: React.FC = () => {
     const updatedAccounts = [editAccount, ...oldAccounts];
     await saveStoreAccounts(updatedAccounts);
     AccountsState.setAccounts(updatedAccounts);
+    setAccountsShow([editAccount]);
     setEditModal(false);
     editToast({
       message: `Account edit with success!`,
