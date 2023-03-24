@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 import { IntroPage } from "./pages/IntroPage";
 
 import { SplashScreen } from "@capacitor/splash-screen";
+import { StatusBar } from "@capacitor/status-bar";
 
 setupIonicReact();
 
@@ -33,6 +34,7 @@ const App: React.FC = () => {
     if (!loading) {
       setAccounts(StoreAccounts);
       SplashScreen.hide();
+      StatusBar.setOverlaysWebView({ overlay: true });
     }
   }, [loading]);
 

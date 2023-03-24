@@ -15,10 +15,10 @@ export const IntroPage: React.FC = () => {
       <IonContent fullscreen className="intro-page">
         <div className="container">
           <div className="logo">
-            <h1>LockBox</h1>
+            <h4>LockBox</h4>
           </div>
           <div className="description">
-            <h2>Securely store and access all your passwords in one place</h2>
+            <h1>Securely store and access all your passwords in one place</h1>
           </div>
           <IonButton className="btn-started" routerLink="/register">
             <IonLabel>Get Started</IonLabel>
