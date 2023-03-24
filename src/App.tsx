@@ -21,6 +21,8 @@ import { MyTabs } from "./components/MyTabs";
 import { useEffect, useState } from "react";
 import { IntroPage } from "./pages/IntroPage";
 
+import { SplashScreen } from "@capacitor/splash-screen";
+
 setupIonicReact();
 
 const App: React.FC = () => {
@@ -30,6 +32,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (!loading) {
       setAccounts(StoreAccounts);
+      SplashScreen.hide();
     }
   }, [loading]);
 
