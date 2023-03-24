@@ -127,41 +127,39 @@ const ShowPasswordPage: React.FC = () => {
           ""
         ) : (
           <>
-            <IonFab vertical="top" horizontal="start">
-              <IonFabButton size="small" onClick={() => history.goBack()}>
-                <IonIcon icon={chevronBackOutline} />
-              </IonFabButton>
-            </IonFab>
-            <IonFab vertical="top" horizontal="end">
-              <IonFabButton
-                size="small"
-                onClick={() => {
-                  deleteAlert({
-                    header: `Sei sicuro di voler eliminare l'account ${accountShow[0].website} ?`,
-                    buttons: [
-                      {
-                        text: "Cancel",
-                        role: "cancel",
-                      },
-                      {
-                        text: "Yes",
-                        role: "confirm",
-                        handler: () => {
-                          deletePassword(
-                            accountShow[0].id,
-                            accountShow[0].website
-                          );
-                        },
-                      },
-                    ],
-                  });
-                }}
-              >
-                <IonIcon icon={trashBinOutline} color="danger" />
-              </IonFabButton>
-            </IonFab>
             <header>
-              <h1>{accountShow[0].website}</h1>
+              <div className="navbar">
+                <IonButton size="small" onClick={() => history.goBack()}>
+                  <IonIcon icon={chevronBackOutline} />
+                </IonButton>
+                <h1>{accountShow[0].website}</h1>
+                <IonButton
+                  size="small"
+                  onClick={() => {
+                    deleteAlert({
+                      header: `Sei sicuro di voler eliminare l'account ${accountShow[0].website} ?`,
+                      buttons: [
+                        {
+                          text: "Cancel",
+                          role: "cancel",
+                        },
+                        {
+                          text: "Yes",
+                          role: "confirm",
+                          handler: () => {
+                            deletePassword(
+                              accountShow[0].id,
+                              accountShow[0].website
+                            );
+                          },
+                        },
+                      ],
+                    });
+                  }}
+                >
+                  <IonIcon icon={trashBinOutline} color="danger" />
+                </IonButton>
+              </div>
             </header>
             <main>
               <div className="photo">
@@ -235,16 +233,13 @@ const ShowPasswordPage: React.FC = () => {
             {/* Modal Edit */}
             <IonModal isOpen={editModal}>
               <IonContent className="edit-modal">
-                <IonFab vertical="top" horizontal="start">
-                  <IonFabButton
-                    size="small"
-                    onClick={() => setEditModal(false)}
-                  >
-                    <IonIcon icon={closeOutline} />
-                  </IonFabButton>
-                </IonFab>
                 <header>
-                  <h1>Edit</h1>
+                  <div className="navbar">
+                    <IonButton onClick={() => setEditModal(false)}>
+                      <IonIcon icon={closeOutline} />
+                    </IonButton>
+                    <h1>Edit</h1>
+                  </div>
                 </header>
                 <main>
                   <form
