@@ -1,6 +1,7 @@
 .passwords-page{
     display: flex;
     flex-direction: column;
+    --overflow: hidden;
     --background: radial-gradient(circle, rgba(134, 61, 246, 1) 0%, rgba(86, 102, 247, 1) 100%);
 
     header{
@@ -29,33 +30,39 @@
             --background: #f4f4f5;
             --box-shadow: none;
             --border-radius: 20px;
+            margin-bottom: 10px;
         }
 
-        ion-item{
-            --background: #f4f4f5;
-            --inner-padding-top: 10px;
-            --inner-padding-bottom: 10px;
-            --border-style: none;
-            --border-radius: 15px;
-            margin-bottom: 20px;
+        ion-list{
+            height: 100%;
+            overflow: scroll;
             
-            ion-thumbnail{
-                --border-radius: 10px;
-            }
-
-            img{
-                max-width: 50px;
-                object-fit: contain;
-            }
-
-            h2{
-                font-weight: bold;
-                font-size: 1.5rem;
-            }
-
-            h6{
-                font-size: .9rem;
-                color: var(--ion-color-medium-tint);
+            ion-item{
+                --background: #f4f4f5;
+                --inner-padding-top: 10px;
+                --inner-padding-bottom: 10px;
+                --border-style: none;
+                --border-radius: 15px;
+                margin-bottom: 20px;
+                
+                ion-thumbnail{
+                    --border-radius: 10px;
+                }
+    
+                img{
+                    max-width: 50px;
+                    object-fit: contain;
+                }
+    
+                h2{
+                    font-weight: bold;
+                    font-size: 1.5rem;
+                }
+    
+                h6{
+                    font-size: .9rem;
+                    color: var(--ion-color-medium-tint);
+                }
             }
         }
     }

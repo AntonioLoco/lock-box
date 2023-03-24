@@ -1,8 +1,6 @@
 import "./index.scss";
 import {
-  IonButton,
   IonContent,
-  IonIcon,
   IonItem,
   IonLabel,
   IonList,
@@ -11,7 +9,6 @@ import {
   IonThumbnail,
 } from "@ionic/react";
 import { useGlobalContext } from "../../hooks/useGlobalContext";
-import { chevronForwardOutline } from "ionicons/icons";
 
 export const PasswordsPage = () => {
   const { AccountsState } = useGlobalContext();
