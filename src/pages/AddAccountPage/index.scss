@@ -1,5 +1,6 @@
 .add-account-page{
     --background: radial-gradient(circle, rgba(134, 61, 246, 1) 0%, rgba(86, 102, 247, 1) 100%);
+    --overflow: hidden;
         header {
             width: 100%;
             height: 10%;
@@ -72,9 +73,9 @@
         }
 
         main{
-            height: 87%;
+            // height: 87%;
             padding: .5em;
-            overflow: scroll;
+            // overflow: scroll;
 
             ion-item{
                 margin-bottom: .8em;
@@ -93,6 +94,14 @@
                     --padding-start: 5px !important;
                     --padding-end: 5px !important;
                 }
+            }
+
+            ion-button[type="submit"] {
+                width: 90%;
+                height: 40px;
+                --border-radius: 15px;
+                --background: #25262B;
+                margin-top: 10px;
             }
         }
     }

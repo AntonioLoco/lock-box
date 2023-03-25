@@ -15,7 +15,7 @@ import {
   useIonAlert,
   useIonToast,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { useGlobalContext } from "../../hooks/useGlobalContext";
 import {
@@ -47,7 +47,7 @@ const ShowPasswordPage: React.FC = () => {
   const [deleteAlert] = useIonAlert();
   const [deleteToast] = useIonToast();
 
-  //Edit
+  //Edit Modal
   const [editModal, setEditModal] = useState(false);
   const [editToast] = useIonToast();
 
@@ -55,6 +55,52 @@ const ShowPasswordPage: React.FC = () => {
   const [linkWebsite, setLinkWebsite] = useState(accountShow[0].linkWebsite);
   const [email, setEmail] = useState(accountShow[0].email);
   const [password, setPassword] = useState(accountShow[0].password);
+
+  const contentRef = useRef<HTMLIonContentElement>(null);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const [currentInput, setCurrentInputRef] = useState("");
+
+  useEffect(() => {
+    // Se la tastiera è gia aperta
+    if (keyboardHeight !== 0) {
+      console.log("Tastiera già aperta");
+      console.log(currentInput);
+      let scrollOffset = document.getElementById(currentInput)?.offsetTop!;
+      if (currentInput === "password") {
+        scrollOffset += 100;
+      } else {
+        scrollOffset += 20;
+      }
+      contentRef.current?.scrollToPoint(0, scrollOffset, 300);
+    }
+
+    window.addEventListener("keyboardDidShow", onKeyboardShow);
+    window.addEventListener("keyboardDidHide", onKeyboardHide);
+
+    return () => {
+      window.removeEventListener("keyboardDidShow", onKeyboardShow);
+      window.removeEventListener("keyboardDidHide", onKeyboardHide);
+    };
+  }, [currentInput]);
+
+  const onKeyboardShow = (e: any) => {
+    console.log(currentInput);
+
+    setKeyboardHeight(e.keyboardHeight);
+    let scrollOffset = document.getElementById(currentInput)?.offsetTop!;
+    if (currentInput === "password") {
+      scrollOffset += 100;
+    } else {
+      scrollOffset += 20;
+    }
+    contentRef.current?.scrollToPoint(0, scrollOffset, 300);
+  };
+
+  const onKeyboardHide = () => {
+    setKeyboardHeight(0);
+    setCurrentInputRef("");
+    contentRef.current?.scrollToPoint(0, 0, 300);
+  };
 
   const printHiddenPassword = (length: number) => {
     return Array(length)
@@ -232,7 +278,7 @@ const ShowPasswordPage: React.FC = () => {
 
             {/* Modal Edit */}
             <IonModal isOpen={editModal}>
-              <IonContent className="edit-modal">
+              <IonContent className="edit-modal" ref={contentRef}>
                 <header>
                   <div className="navbar">
                     <IonButton onClick={() => setEditModal(false)}>
@@ -257,8 +303,12 @@ const ShowPasswordPage: React.FC = () => {
                         <h1>Name</h1>
                       </IonLabel>
                       <IonInput
+                        id="name"
                         value={website}
                         onIonChange={(e) => setWebsite(e.detail.value!)}
+                        onIonFocus={() => {
+                          setCurrentInputRef("name");
+                        }}
                       ></IonInput>
                     </IonItem>
 
@@ -268,8 +318,12 @@ const ShowPasswordPage: React.FC = () => {
                         <h1>Link Web</h1>
                       </IonLabel>
                       <IonInput
+                        id="link"
                         value={linkWebsite}
                         onIonChange={(e) => setLinkWebsite(e.detail.value!)}
+                        onIonFocus={() => {
+                          setCurrentInputRef("link");
+                        }}
                       ></IonInput>
                     </IonItem>
 
@@ -279,8 +333,12 @@ const ShowPasswordPage: React.FC = () => {
                         <h1>Email or Username</h1>
                       </IonLabel>
                       <IonInput
+                        id="email"
                         value={email}
                         onIonChange={(e) => setEmail(e.detail.value!)}
+                        onIonFocus={() => {
+                          setCurrentInputRef("email");
+                        }}
                       ></IonInput>
                     </IonItem>
 
@@ -289,13 +347,21 @@ const ShowPasswordPage: React.FC = () => {
                         <h1>Password</h1>
                       </IonLabel>
                       <IonInput
+                        id="password"
                         value={password}
                         onIonChange={(e) => setPassword(e.detail.value!)}
+                        onIonFocus={() => {
+                          setCurrentInputRef("password");
+                        }}
                       ></IonInput>
                     </IonItem>
 
                     <IonButton type="submit">Edit</IonButton>
                   </form>
+                  <div
+                    id="keyboardHeight"
+                    style={{ height: `${keyboardHeight}px` }}
+                  ></div>
                 </main>
               </IonContent>
             </IonModal>

@@ -29,12 +29,17 @@ export const AddAccountPage = () => {
   const [currentInput, setCurrentInputRef] = useState("");
 
   useEffect(() => {
+    // Se la tastiera è gia aperta
     if (keyboardHeight !== 0) {
       console.log("Tastiera già aperta");
       console.log(currentInput);
-
-      const scrollOffset = document.getElementById(currentInput)?.offsetTop!;
-      contentRef.current?.scrollToPoint(0, scrollOffset + 50, 300);
+      let scrollOffset = document.getElementById(currentInput)?.offsetTop!;
+      if (currentInput === "password") {
+        scrollOffset += 100;
+      } else {
+        scrollOffset += 50;
+      }
+      contentRef.current?.scrollToPoint(0, scrollOffset, 300);
     }
 
     window.addEventListener("keyboardDidShow", onKeyboardShow);
@@ -50,8 +55,13 @@ export const AddAccountPage = () => {
     console.log(currentInput);
 
     setKeyboardHeight(e.keyboardHeight);
-    const scrollOffset = document.getElementById(currentInput)?.offsetTop!;
-    contentRef.current?.scrollToPoint(0, scrollOffset + 50, 300);
+    let scrollOffset = document.getElementById(currentInput)?.offsetTop!;
+    if (currentInput === "password") {
+      scrollOffset += 100;
+    } else {
+      scrollOffset += 50;
+    }
+    contentRef.current?.scrollToPoint(0, scrollOffset, 300);
   };
 
   const onKeyboardHide = () => {
@@ -163,7 +173,7 @@ export const AddAccountPage = () => {
           </form>
           <div
             id="keyboardHeight"
-            style={{ height: `${keyboardHeight}px` }}
+            style={{ height: `${keyboardHeight}px`, width: "100%" }}
           ></div>
         </main>
       </IonContent>
