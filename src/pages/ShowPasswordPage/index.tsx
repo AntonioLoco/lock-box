@@ -27,6 +27,7 @@ import {
 } from "ionicons/icons";
 import { Clipboard } from "@capacitor/clipboard";
 import useStorage from "../../hooks/useStorage";
+import { GeneratePasswordModal } from "../../components/GeneratePasswordModal";
 
 const ShowPasswordPage: React.FC = () => {
   const history = useHistory();
@@ -49,6 +50,7 @@ const ShowPasswordPage: React.FC = () => {
   //Edit Modal
   const [editModal, setEditModal] = useState(false);
   const [editToast] = useIonToast();
+  const [modalGeneratePassword, setModalGeneratePassword] = useState(false);
 
   //Input Modal
   const [website, setWebsite] = useState(accountShow[0].website);
@@ -411,9 +413,25 @@ const ShowPasswordPage: React.FC = () => {
                     </IonItem>
 
                     <IonItem>
-                      <IonLabel position="stacked">
-                        <h1>Password</h1>
-                      </IonLabel>
+                      <div
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <IonLabel position="stacked">
+                          <h1>Password</h1>
+                        </IonLabel>
+                        <a
+                          color="primary"
+                          style={{ fontSize: ".8rem", marginBottom: "-15px" }}
+                          onClick={() => setModalGeneratePassword(true)}
+                        >
+                          Genera la Password
+                        </a>
+                      </div>
                       <IonInput
                         id="password"
                         value={password}
@@ -437,6 +455,11 @@ const ShowPasswordPage: React.FC = () => {
                   ></div>
                 </main>
               </IonContent>
+              <GeneratePasswordModal
+                isOpen={modalGeneratePassword}
+                setIsOpen={setModalGeneratePassword}
+                setPasswordForm={setPassword}
+              />
             </IonModal>
           </>
         )}
