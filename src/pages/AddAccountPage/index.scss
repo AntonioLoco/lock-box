@@ -29,6 +29,7 @@
                 width: 100%;
                 margin-bottom: 1.5em;
                 --border-style:none;
+                position: relative;
                 
                 ion-label{
                     h1{
@@ -46,6 +47,10 @@
                     --padding-start: 10px!important;
                     --padding-end: 10px!important;
                 }   
+
+                ion-note{
+                    transition: 1s all;
+                }
             }
 
             ion-button[type="submit"]{
@@ -73,12 +78,10 @@
         }
 
         main{
-            // height: 87%;
-            padding: .5em;
-            // overflow: scroll;
+            padding: .5em .5em 2em;
 
             ion-item{
-                margin-bottom: .8em;
+                margin-bottom: .5em;
 
                 ion-label{
                     h1{
@@ -89,9 +92,9 @@
                 ion-input{
                     font-size: .8em;
                     margin-top: 5px;
-                    --padding-top: 10px !important;
-                    --padding-bottom: 10px !important;
-                    --padding-start: 5px !important;
+                    --padding-top: 5px !important;
+                    --padding-bottom: 5px !important;
+                    --padding-start: 10px !important;
                     --padding-end: 5px !important;
                 }
             }

@@ -3,7 +3,6 @@ import {
   IonButton,
   IonContent,
   IonFab,
-  IonFabButton,
   IonIcon,
   IonInput,
   IonItem,
@@ -51,10 +50,23 @@ const ShowPasswordPage: React.FC = () => {
   const [editModal, setEditModal] = useState(false);
   const [editToast] = useIonToast();
 
+  //Input Modal
   const [website, setWebsite] = useState(accountShow[0].website);
   const [linkWebsite, setLinkWebsite] = useState(accountShow[0].linkWebsite);
   const [email, setEmail] = useState(accountShow[0].email);
   const [password, setPassword] = useState(accountShow[0].password);
+
+  //Error Form
+  const [errorEmail, setErrorEmail] = useState({ status: false, message: "" });
+  const [errorWebSite, setErrorWebSite] = useState({
+    status: false,
+    message: "",
+  });
+  const [errorLink, setErrorLink] = useState({ status: false, message: "" });
+  const [errorPassword, setErrorPassword] = useState({
+    status: false,
+    message: "",
+  });
 
   const contentRef = useRef<HTMLIonContentElement>(null);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -63,8 +75,6 @@ const ShowPasswordPage: React.FC = () => {
   useEffect(() => {
     // Se la tastiera è gia aperta
     if (keyboardHeight !== 0) {
-      console.log("Tastiera già aperta");
-      console.log(currentInput);
       let scrollOffset = document.getElementById(currentInput)?.offsetTop!;
       if (currentInput === "password") {
         scrollOffset += 100;
@@ -84,8 +94,6 @@ const ShowPasswordPage: React.FC = () => {
   }, [currentInput]);
 
   const onKeyboardShow = (e: any) => {
-    console.log(currentInput);
-
     setKeyboardHeight(e.keyboardHeight);
     let scrollOffset = document.getElementById(currentInput)?.offsetTop!;
     if (currentInput === "password") {
@@ -134,36 +142,87 @@ const ShowPasswordPage: React.FC = () => {
     history.goBack();
     deleteToast({
       message: `Account ${name} eliminato con successo!`,
-      duration: 3000,
+      duration: 1500,
       position: "top",
       color: "success",
     });
   };
 
+  //funzione base check email
+  const isEmail = (email: string) => {
+    return /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(
+      email
+    );
+  };
+
   const handleEditPassword = async (e: any, id: string, name: string) => {
     e.preventDefault();
-    const editAccount = {
-      id,
-      email,
-      password,
-      website,
-      linkWebsite,
-    };
+    setErrorWebSite({ status: false, message: "" });
+    setErrorLink({ status: false, message: "" });
+    setErrorEmail({ status: false, message: "" });
+    setErrorPassword({ status: false, message: "" });
 
-    const oldAccounts = AccountsState.accounts.filter(
-      (account) => account.id !== id
-    );
-    const updatedAccounts = [editAccount, ...oldAccounts];
-    await saveStoreAccounts(updatedAccounts);
-    AccountsState.setAccounts(updatedAccounts);
-    setAccountsShow([editAccount]);
-    setEditModal(false);
-    editToast({
-      message: `Account edit with success!`,
-      color: "success",
-      position: "top",
-      duration: 3000,
-    });
+    let errors = 0;
+    // Controlli per Valiadazione
+    if (website.length === 0) {
+      errors++;
+      setErrorWebSite({
+        status: true,
+        message: "Il nome dell'account è richiesto!",
+      });
+    }
+
+    if (linkWebsite.length === 0) {
+      errors++;
+      setErrorLink({
+        status: true,
+        message: "Il link del sito è richiesto!",
+      });
+    }
+
+    if (email.length === 0) {
+      errors++;
+      setErrorEmail({
+        status: true,
+        message: "Un email o username è richiesto!",
+      });
+    } else if (!isEmail(email)) {
+      errors++;
+      setErrorEmail({ status: true, message: "L'email non è corretta!" });
+    }
+
+    if (password.length <= 4) {
+      errors++;
+      setErrorPassword({
+        status: true,
+        message: "La password deve essere di almeno 4 caratteri",
+      });
+    }
+
+    if (errors === 0) {
+      const editAccount = {
+        id,
+        email,
+        password,
+        website,
+        linkWebsite,
+      };
+
+      const oldAccounts = AccountsState.accounts.filter(
+        (account) => account.id !== id
+      );
+      const updatedAccounts = [editAccount, ...oldAccounts];
+      await saveStoreAccounts(updatedAccounts);
+      AccountsState.setAccounts(updatedAccounts);
+      setAccountsShow([editAccount]);
+      setEditModal(false);
+      editToast({
+        message: `Account edit with success!`,
+        color: "success",
+        position: "top",
+        duration: 1500,
+      });
+    }
   };
 
   return (
@@ -310,6 +369,9 @@ const ShowPasswordPage: React.FC = () => {
                           setCurrentInputRef("name");
                         }}
                       ></IonInput>
+                      {errorWebSite.status && (
+                        <IonNote color="danger">{errorWebSite.message}</IonNote>
+                      )}
                     </IonItem>
 
                     {/* Link Website */}
@@ -325,6 +387,9 @@ const ShowPasswordPage: React.FC = () => {
                           setCurrentInputRef("link");
                         }}
                       ></IonInput>
+                      {errorLink.status && (
+                        <IonNote color="danger">{errorLink.message}</IonNote>
+                      )}
                     </IonItem>
 
                     {/* Email or Username */}
@@ -340,6 +405,9 @@ const ShowPasswordPage: React.FC = () => {
                           setCurrentInputRef("email");
                         }}
                       ></IonInput>
+                      {errorEmail.status && (
+                        <IonNote color="danger">{errorEmail.message}</IonNote>
+                      )}
                     </IonItem>
 
                     <IonItem>
@@ -354,6 +422,11 @@ const ShowPasswordPage: React.FC = () => {
                           setCurrentInputRef("password");
                         }}
                       ></IonInput>
+                      {errorPassword.status && (
+                        <IonNote color="danger">
+                          {errorPassword.message}
+                        </IonNote>
+                      )}
                     </IonItem>
 
                     <IonButton type="submit">Edit</IonButton>

@@ -1,0 +1,123 @@
+.modal-generate-password{
+    --background: radial-gradient(circle, rgba(134, 61, 246, 1) 0%, rgba(86, 102, 247, 1) 100%);
+    --overflow: hidden;
+
+    header {
+        width: 100%;
+        height: 10%;
+        padding-top: 1em;
+
+        .navbar {
+            width: 100%;
+            position: relative;
+            text-align: center;
+            padding: 1.5em;
+            display: flex;
+            align-items: center;
+
+            h1 {
+                font-size: 1.5rem;
+                color: white;
+                margin: 0;
+            }
+
+            ion-button {
+                --background: none;
+                --box-shadow: none;
+            }
+        }
+    }
+
+    main {
+        width: 100%;
+        height: 90%;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        background-color: white;
+        padding: 1em;
+        position: relative;
+        text-align: center;
+
+        ion-item{
+            --border-style: none;
+            margin-bottom: 2em;
+
+            ion-label{
+                opacity: 1!important;
+                h1{
+                    font-size: 1rem;
+                    font-weight: bold;
+                    color: black;
+                }
+            }
+
+            h4{
+                color: var(--ion-color-primary);
+            }
+            .password-generate{
+                width: 100%;
+                margin-top: 10px;
+                border: 1.5px solid #25262B;
+                border-radius: 15px;
+                padding-top: 5px !important;
+                padding-bottom: 5px !important;
+                padding-left: 5px !important;
+                padding-right: 5px !important;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                h4{
+                    font-size: .8em;
+                    color: grey;
+                }
+            }
+            ion-button.copy-btn{
+                color: var(--ion-color-primary);
+                --background: none;
+                --border-style: none;
+            }
+        }
+
+        ion-button.generate-button{
+            width: 90%;
+            height: 50px;
+            --border-radius: 15px;
+            --background: #25262B;
+            margin-top: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 376px) and (max-height: 668px) {
+    .modal-generate-password{
+        header{
+            height: 15%;
+
+            .navbar{
+
+                h1{
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        main{
+            overflow: scroll;
+            height: 85%;
+
+            ion-item{
+                margin-bottom: .5em;
+            }
+
+                ion-button.generate-button{
+                width: 90%;
+                height: 40px;
+                --border-radius: 15px;
+                --background: #25262B;
+                margin-top: 10px;
+            }
+        }
+    }
+
+}
