@@ -8,7 +8,7 @@ import {
   IonPage,
   useIonToast,
 } from "@ionic/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGlobalContext } from "../../hooks/useGlobalContext";
 import useStorage, { AccountItem } from "../../hooks/useStorage";
 import { useHistory } from "react-router";
@@ -23,6 +23,42 @@ export const AddAccountPage = () => {
   const [password, setPassword] = useState("");
   const [webSite, setWebSite] = useState("");
   const [linkWebsite, setLinkWebsite] = useState("");
+
+  const contentRef = useRef<HTMLIonContentElement>(null);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const [currentInput, setCurrentInputRef] = useState("");
+
+  useEffect(() => {
+    if (keyboardHeight !== 0) {
+      console.log("Tastiera già aperta");
+      console.log(currentInput);
+
+      const scrollOffset = document.getElementById(currentInput)?.offsetTop!;
+      contentRef.current?.scrollToPoint(0, scrollOffset + 50, 300);
+    }
+
+    window.addEventListener("keyboardDidShow", onKeyboardShow);
+    window.addEventListener("keyboardDidHide", onKeyboardHide);
+
+    return () => {
+      window.removeEventListener("keyboardDidShow", onKeyboardShow);
+      window.removeEventListener("keyboardDidHide", onKeyboardHide);
+    };
+  }, [currentInput]);
+
+  const onKeyboardShow = (e: any) => {
+    console.log(currentInput);
+
+    setKeyboardHeight(e.keyboardHeight);
+    const scrollOffset = document.getElementById(currentInput)?.offsetTop!;
+    contentRef.current?.scrollToPoint(0, scrollOffset + 50, 300);
+  };
+
+  const onKeyboardHide = () => {
+    setKeyboardHeight(0);
+    setCurrentInputRef("");
+    contentRef.current?.scrollToPoint(0, 0, 300);
+  };
 
   const handleAdd = async (e: any) => {
     e.preventDefault();
@@ -50,7 +86,11 @@ export const AddAccountPage = () => {
   };
   return (
     <IonPage>
-      <IonContent className="add-account-page">
+      <IonContent
+        className="add-account-page"
+        scrollEvents={true}
+        ref={contentRef}
+      >
         <header>
           <h1>Aggiungi un Account</h1>
         </header>
@@ -62,9 +102,13 @@ export const AddAccountPage = () => {
                 <h1>Name</h1>
               </IonLabel>
               <IonInput
+                id="name"
                 placeholder="es. Facebook"
                 value={webSite}
                 onIonChange={(e) => setWebSite(e.detail.value!)}
+                onIonFocus={() => {
+                  setCurrentInputRef("name");
+                }}
               ></IonInput>
             </IonItem>
 
@@ -74,9 +118,13 @@ export const AddAccountPage = () => {
                 <h1>Link Web</h1>
               </IonLabel>
               <IonInput
+                id="link"
                 placeholder="es. www.facebook.com"
                 value={linkWebsite}
                 onIonChange={(e) => setLinkWebsite(e.detail.value!)}
+                onIonFocus={() => {
+                  setCurrentInputRef("link");
+                }}
               ></IonInput>
             </IonItem>
 
@@ -86,9 +134,13 @@ export const AddAccountPage = () => {
                 <h1>Email or Username</h1>
               </IonLabel>
               <IonInput
+                id="email"
                 placeholder="Inserisci la tua email o username"
                 value={email}
                 onIonChange={(e) => setEmail(e.detail.value!)}
+                onIonFocus={() => {
+                  setCurrentInputRef("email");
+                }}
               ></IonInput>
             </IonItem>
 
@@ -97,14 +149,22 @@ export const AddAccountPage = () => {
                 <h1>Password</h1>
               </IonLabel>
               <IonInput
+                id="password"
                 placeholder="Inserisci o genera la tua password"
                 value={password}
                 onIonChange={(e) => setPassword(e.detail.value!)}
+                onIonFocus={() => {
+                  setCurrentInputRef("password");
+                }}
               ></IonInput>
             </IonItem>
 
             <IonButton type="submit">Save</IonButton>
           </form>
+          <div
+            id="keyboardHeight"
+            style={{ height: `${keyboardHeight}px` }}
+          ></div>
         </main>
       </IonContent>
     </IonPage>

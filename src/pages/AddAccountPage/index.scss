@@ -1,6 +1,5 @@
 .add-account-page{
     --background: radial-gradient(circle, rgba(134, 61, 246, 1) 0%, rgba(86, 102, 247, 1) 100%);
-    --overflow: hidden;
         header {
             width: 100%;
             height: 10%;
@@ -54,6 +53,10 @@
                 --border-radius: 15px;
                 --background: #25262B;
                 margin-top: 20px;
+            }
+
+            #keyboardHeight{
+                width: 100%;
             }
         }
 }

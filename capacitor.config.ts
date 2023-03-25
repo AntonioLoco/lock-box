@@ -7,7 +7,7 @@ const config: CapacitorConfig = {
   bundledWebRuntime: false,
    plugins: {
     SplashScreen: {
-      // launchAutoHide: true,
+      launchAutoHide: false,
       // launchShowDuration: 3000,
       launchFadeOutDuration: 500,
       backgroundColor: "#ffffff",
