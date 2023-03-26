@@ -64,13 +64,6 @@ export const AddAccountPage = () => {
     contentRef.current?.scrollToPoint(0, 0, 300);
   };
 
-  //funzione base check email
-  const isEmail = (email: string) => {
-    return /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(
-      email
-    );
-  };
-
   //Function Add Account
   const handleAdd = async (e: any) => {
     e.preventDefault();
@@ -103,9 +96,6 @@ export const AddAccountPage = () => {
         status: true,
         message: "Un email o username è richiesto!",
       });
-    } else if (!isEmail(email)) {
-      errors++;
-      setErrorEmail({ status: true, message: "L'email non è corretta!" });
     }
 
     if (password.length <= 4) {

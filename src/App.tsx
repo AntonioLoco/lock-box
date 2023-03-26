@@ -21,20 +21,19 @@ import { MyTabs } from "./components/MyTabs";
 import { useEffect, useState } from "react";
 import { IntroPage } from "./pages/IntroPage";
 
-import { SplashScreen } from "@capacitor/splash-screen";
 import { StatusBar } from "@capacitor/status-bar";
+import LoadingPage from "./pages/LoadingPage";
 
 setupIonicReact();
 
 const App: React.FC = () => {
   const { pinCode, loading, StoreAccounts } = useStorage();
   const [accounts, setAccounts] = useState<AccountItem[]>([]);
+  StatusBar.setOverlaysWebView({ overlay: true });
 
   useEffect(() => {
     if (!loading) {
       setAccounts(StoreAccounts);
-      SplashScreen.hide();
-      StatusBar.setOverlaysWebView({ overlay: true });
     }
   }, [loading]);
 
@@ -47,7 +46,7 @@ const App: React.FC = () => {
           <IonRouterOutlet>
             <Route exact path="/">
               {loading ? (
-                "Loading"
+                <LoadingPage />
               ) : pinCode ? (
                 <Redirect to="/login" />
               ) : (
