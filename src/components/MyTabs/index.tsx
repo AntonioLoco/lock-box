@@ -10,11 +10,10 @@ import {
 } from "@ionic/react";
 import {
   addCircleOutline,
-  homeOutline,
   lockClosedOutline,
   logOutOutline,
 } from "ionicons/icons";
-import React, { useState } from "react";
+import React from "react";
 
 //Router
 import { Redirect, Route, useHistory } from "react-router";
@@ -23,6 +22,8 @@ import { Redirect, Route, useHistory } from "react-router";
 import { PasswordsPage } from "../../pages/PasswordsPage";
 import { AddAccountPage } from "../../pages/AddAccountPage";
 import ShowPasswordPage from "../../pages/ShowPasswordPage";
+
+import { Plugins } from "@capacitor/core";
 
 export const MyTabs: React.FC = () => {
   const [presentAlert] = useIonAlert();
@@ -62,7 +63,8 @@ export const MyTabs: React.FC = () => {
                   text: "Logout",
                   role: "confirm",
                   handler: () => {
-                    history.push("/login");
+                    Plugins.App.exitApp();
+                    // history.push("/login");
                   },
                 },
               ],

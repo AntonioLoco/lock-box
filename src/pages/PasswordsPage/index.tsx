@@ -1,6 +1,5 @@
 import "./index.scss";
 import {
-  IonBackButton,
   IonButton,
   IonContent,
   IonItem,
@@ -9,16 +8,17 @@ import {
   IonPage,
   IonSearchbar,
   IonThumbnail,
-  useIonViewDidEnter,
 } from "@ionic/react";
 import { useGlobalContext } from "../../hooks/useGlobalContext";
 import React, { useEffect, useState } from "react";
 import { AccountItem } from "../../hooks/useStorage";
+import { useHistory } from "react-router";
 
 export const PasswordsPage: React.FC = () => {
   const { AccountsState } = useGlobalContext();
   const [nameFilter, setNameFilter] = useState("");
   const [searchAccount, setSearchAccount] = useState<AccountItem[]>([]);
+  const history = useHistory();
 
   useEffect(() => {
     if (nameFilter.length > 0) {
@@ -28,6 +28,8 @@ export const PasswordsPage: React.FC = () => {
           nameFilter.toLowerCase()
         ) {
           return account;
+        } else {
+          return;
         }
       });
       setSearchAccount(filterAccounts);
@@ -35,11 +37,11 @@ export const PasswordsPage: React.FC = () => {
   }, [nameFilter]);
 
   document.addEventListener("ionBackButton", (ev: any) => {
-    console.log(
-      ev.detail.register(10, () => {
-        console.log("chiamato");
-      })
-    );
+    ev.detail.register(10, () => {
+      if (history.location.pathname !== "/app/passwords") {
+        history.goBack();
+      }
+    });
   });
 
   return (
