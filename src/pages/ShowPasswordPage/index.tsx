@@ -330,120 +330,124 @@ const ShowPasswordPage: React.FC = () => {
             {/* Modal Edit */}
             <IonModal isOpen={editModal}>
               <IonContent className="edit-modal" ref={contentRef}>
-                <header>
-                  <div className="navbar">
-                    <IonButton onClick={() => setEditModal(false)}>
-                      <IonIcon icon={closeOutline} />
-                    </IonButton>
-                    <h1>Edit</h1>
-                  </div>
-                </header>
-                <main>
-                  <form
-                    onSubmit={(e) =>
-                      handleEditPassword(
-                        e,
-                        accountShow[0].id,
-                        accountShow[0].website
-                      )
-                    }
-                  >
-                    {/* Name Account */}
-                    <IonItem>
-                      <IonLabel position="stacked">
-                        <h1>Name</h1>
-                      </IonLabel>
-                      <IonInput
-                        id="name"
-                        value={website}
-                        onIonChange={(e) => setWebsite(e.detail.value!)}
-                        onIonFocus={() => {
-                          setCurrentInputRef("name");
-                        }}
-                      ></IonInput>
-                      {errorWebSite.status && (
-                        <IonNote color="danger">{errorWebSite.message}</IonNote>
-                      )}
-                    </IonItem>
-
-                    {/* Link Website */}
-                    <IonItem>
-                      <IonLabel position="stacked">
-                        <h1>Link Web</h1>
-                      </IonLabel>
-                      <IonInput
-                        id="link"
-                        value={linkWebsite}
-                        onIonChange={(e) => setLinkWebsite(e.detail.value!)}
-                        onIonFocus={() => {
-                          setCurrentInputRef("link");
-                        }}
-                      ></IonInput>
-                      {errorLink.status && (
-                        <IonNote color="danger">{errorLink.message}</IonNote>
-                      )}
-                    </IonItem>
-
-                    {/* Email or Username */}
-                    <IonItem>
-                      <IonLabel position="stacked">
-                        <h1>Email or Username</h1>
-                      </IonLabel>
-                      <IonInput
-                        id="email"
-                        value={email}
-                        onIonChange={(e) => setEmail(e.detail.value!)}
-                        onIonFocus={() => {
-                          setCurrentInputRef("email");
-                        }}
-                      ></IonInput>
-                      {errorEmail.status && (
-                        <IonNote color="danger">{errorEmail.message}</IonNote>
-                      )}
-                    </IonItem>
-
-                    <IonItem>
-                      <div
-                        style={{
-                          width: "100%",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        }}
-                      >
+                <div className="container">
+                  <header>
+                    <div className="navbar">
+                      <IonButton onClick={() => setEditModal(false)}>
+                        <IonIcon icon={closeOutline} />
+                      </IonButton>
+                      <h1>Edit</h1>
+                    </div>
+                  </header>
+                  <main>
+                    <form
+                      onSubmit={(e) =>
+                        handleEditPassword(
+                          e,
+                          accountShow[0].id,
+                          accountShow[0].website
+                        )
+                      }
+                    >
+                      {/* Name Account */}
+                      <IonItem>
                         <IonLabel position="stacked">
-                          <h1>Password</h1>
+                          <h1>Name</h1>
                         </IonLabel>
-                        <a
-                          color="primary"
-                          style={{ fontSize: ".8rem", marginBottom: "-15px" }}
-                          onClick={() => setModalGeneratePassword(true)}
-                        >
-                          Genera la Password
-                        </a>
-                      </div>
-                      <IonInput
-                        id="password"
-                        value={password}
-                        onIonChange={(e) => setPassword(e.detail.value!)}
-                        onIonFocus={() => {
-                          setCurrentInputRef("password");
-                        }}
-                      ></IonInput>
-                      {errorPassword.status && (
-                        <IonNote color="danger">
-                          {errorPassword.message}
-                        </IonNote>
-                      )}
-                    </IonItem>
+                        <IonInput
+                          id="name"
+                          value={website}
+                          onIonChange={(e) => setWebsite(e.detail.value!)}
+                          onIonFocus={() => {
+                            setCurrentInputRef("name");
+                          }}
+                        ></IonInput>
+                        {errorWebSite.status && (
+                          <IonNote color="danger">
+                            {errorWebSite.message}
+                          </IonNote>
+                        )}
+                      </IonItem>
 
-                    <IonButton type="submit">Edit</IonButton>
-                  </form>
-                  <div
-                    id="keyboardHeight"
-                    style={{ height: `${keyboardHeight}px` }}
-                  ></div>
-                </main>
+                      {/* Link Website */}
+                      <IonItem>
+                        <IonLabel position="stacked">
+                          <h1>Link Web</h1>
+                        </IonLabel>
+                        <IonInput
+                          id="link"
+                          value={linkWebsite}
+                          onIonChange={(e) => setLinkWebsite(e.detail.value!)}
+                          onIonFocus={() => {
+                            setCurrentInputRef("link");
+                          }}
+                        ></IonInput>
+                        {errorLink.status && (
+                          <IonNote color="danger">{errorLink.message}</IonNote>
+                        )}
+                      </IonItem>
+
+                      {/* Email or Username */}
+                      <IonItem>
+                        <IonLabel position="stacked">
+                          <h1>Email or Username</h1>
+                        </IonLabel>
+                        <IonInput
+                          id="email"
+                          value={email}
+                          onIonChange={(e) => setEmail(e.detail.value!)}
+                          onIonFocus={() => {
+                            setCurrentInputRef("email");
+                          }}
+                        ></IonInput>
+                        {errorEmail.status && (
+                          <IonNote color="danger">{errorEmail.message}</IonNote>
+                        )}
+                      </IonItem>
+
+                      <IonItem>
+                        <div
+                          style={{
+                            width: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <IonLabel position="stacked">
+                            <h1>Password</h1>
+                          </IonLabel>
+                          <a
+                            color="primary"
+                            style={{ fontSize: ".8rem", marginBottom: "-15px" }}
+                            onClick={() => setModalGeneratePassword(true)}
+                          >
+                            Genera la Password
+                          </a>
+                        </div>
+                        <IonInput
+                          id="password"
+                          value={password}
+                          onIonChange={(e) => setPassword(e.detail.value!)}
+                          onIonFocus={() => {
+                            setCurrentInputRef("password");
+                          }}
+                        ></IonInput>
+                        {errorPassword.status && (
+                          <IonNote color="danger">
+                            {errorPassword.message}
+                          </IonNote>
+                        )}
+                      </IonItem>
+
+                      <IonButton type="submit">Edit</IonButton>
+                    </form>
+                    <div
+                      id="keyboardHeight"
+                      style={{ height: `${keyboardHeight}px` }}
+                    ></div>
+                  </main>
+                </div>
               </IonContent>
               <GeneratePasswordModal
                 isOpen={modalGeneratePassword}

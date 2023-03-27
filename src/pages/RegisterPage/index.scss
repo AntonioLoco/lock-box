@@ -11,7 +11,7 @@
         justify-content: center;
 
         h1{
-            font-size: 1.5rem;
+            font-size: 28px;
             font-weight: bold;
             color: white;
             margin: 0;
@@ -26,13 +26,13 @@
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
         background-color: white;
-        padding: 5em 1em 2em;
+        padding: 48px;
         position: relative;
 
         .pin{
             width: 100%;
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 25px;
             color: black;
 
             span{
@@ -51,10 +51,6 @@
                     left: 50%;
                     transform: translate(-50%, -50%);
                 }
-            }
-
-            ion-note{
-                font-size: 1rem;
             }
         }
     }

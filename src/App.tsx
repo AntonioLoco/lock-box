@@ -20,16 +20,19 @@ import { RegisterPage } from "./pages/RegisterPage";
 import { MyTabs } from "./components/MyTabs";
 import { useEffect, useState } from "react";
 import { IntroPage } from "./pages/IntroPage";
+import LoadingPage from "./pages/LoadingPage";
 
 import { StatusBar } from "@capacitor/status-bar";
-import LoadingPage from "./pages/LoadingPage";
 
 setupIonicReact();
 
 const App: React.FC = () => {
   const { pinCode, loading, StoreAccounts } = useStorage();
   const [accounts, setAccounts] = useState<AccountItem[]>([]);
-  StatusBar.setOverlaysWebView({ overlay: true });
+
+  useEffect(() => {
+    StatusBar.setBackgroundColor({ color: "#5c60f7" });
+  }, []);
 
   useEffect(() => {
     if (!loading) {

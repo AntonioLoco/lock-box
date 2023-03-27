@@ -13,10 +13,10 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: 3em 1em 1em;
+                padding: 20px;
 
                 h1 {
-                    font-size: 2rem;
+                    font-size: 32px;
                     color: white;
                     margin: 0;
                 }
@@ -34,7 +34,7 @@
             border-top-left-radius: 30px;
             border-top-right-radius: 30px;
             background-color: white;
-            padding: 6em 1em 2em;
+            padding: 110px 20px 28px;
             position: relative;
 
             .photo{
@@ -61,17 +61,17 @@
                 --background: #f4f4f5;
                 --border-style: none;
                 border-radius: 20px;
-                margin-bottom: 1.5em;
+                margin-bottom: 30px;
                 position: relative;
 
                 h3{
-                    font-size: 1.2rem;
+                    font-size: 20px;
                     font-weight: bold;
                 }
 
                 p{
                     color: var(--ion-color-medium-shade);
-                    font-size: 1rem;
+                    font-size: 14px;
                 }
 
                 .buttons{
@@ -94,7 +94,7 @@
 
         ion-button{
             --background: #25262b;
-            font-size: 1rem;
+            font-size: 18px;
             width: 80%;
             height: 50px;
             --border-radius: 20px;
@@ -104,21 +104,25 @@
 }
 
 .edit-modal{
-    --background: radial-gradient(circle, rgba(134, 61, 246, 1) 0%, rgba(86, 102, 247, 1) 100%);
+    --background: #ffff;
     --overflow: hidden;
+
+    .container{
+        background:  radial-gradient(circle, rgba(134, 61, 246, 1) 0%, rgba(86, 102, 247, 1) 100%);
+    }
+
     header {
         width: 100%;
         height: 10%;
-        padding-top: 2em;
         
         .navbar{
             width: 100%;
             position: relative;
             text-align: center;
-            padding: 1em;
+            padding: 16px;
             
             h1 {
-                font-size: 2rem;
+                font-size: 28px;
                 color: white;
                 margin: 0;
             }
@@ -139,24 +143,24 @@
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
         background-color: white;
-        padding: 1em;
+        padding: 12px;
         position: relative;
         text-align: center;
 
         ion-item{
             width: 100%;
-            margin-bottom: 1.5em;
+            margin-bottom: 25px;
             --border-style:none;
             
             ion-label{
                 h1{
                     font-weight: bold;
-                    font-size: 1.5em;
+                    font-size: 24px;
                 }
             }
 
             ion-input{
-                font-size: 1em;
+                font-size: 16px;
                 margin-top: 10px;
                 border: 1.5px solid #25262B;
                 border-radius: 15px;

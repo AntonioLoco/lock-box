@@ -3,6 +3,7 @@ import {
   IonButton,
   IonCheckbox,
   IonContent,
+  IonFab,
   IonIcon,
   IonInput,
   IonItem,
@@ -117,13 +118,13 @@ export const GeneratePasswordModal = ({
   return (
     <IonModal isOpen={isOpen}>
       <IonContent className="modal-generate-password">
+        <IonFab vertical="top" horizontal="start">
+          <IonButton size="small" onClick={() => setIsOpen(false)}>
+            <IonIcon icon={close} />
+          </IonButton>
+        </IonFab>
         <header>
-          <div className="navbar">
-            <IonButton onClick={() => setIsOpen(false)}>
-              <IonIcon icon={close} />
-            </IonButton>
-            <h1>Generate password</h1>
-          </div>
+          <h1>Generate password</h1>
         </header>
         <main>
           <IonItem>

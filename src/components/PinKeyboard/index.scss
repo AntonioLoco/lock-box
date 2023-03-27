@@ -10,12 +10,13 @@
     ion-button{
         width: 75px;
         height: 75px;
-        font-size: 1.3rem;
+        font-size: 20px;
         --border-style: none;
         --border-radius: 50%;
 
         &.backspace-button{
         --border-radius: 10px;
+            font-size: 20px;
         }
     }
 }

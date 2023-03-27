@@ -1,5 +1,5 @@
 import "../RegisterPage/index.scss";
-import { IonContent, IonNote, IonPage } from "@ionic/react";
+import { IonContent, IonPage, useIonToast } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import PinKeyboard from "../../components/PinKeyboard";
@@ -9,18 +9,29 @@ export const LoginPage: React.FC = () => {
   const { pinCode } = useStorage();
   const history = useHistory();
   const [pin, setPin] = useState("");
-  const [errorPin, setErrorPin] = useState(false);
+  const [errorToast] = useIonToast();
+  const [successLoginToast] = useIonToast();
 
   useEffect(() => {
-    if (pin.length === 1 && errorPin) {
-      setErrorPin(false);
-    }
     if (pin.length === 5) {
       if (pin === pinCode) {
         history.push("/app");
+        setTimeout(() => {
+          successLoginToast({
+            message: "Benvenuto",
+            duration: 1000,
+            position: "top",
+            color: "dark",
+          });
+        }, 500);
         setPin("");
       } else {
-        setErrorPin(true);
+        errorToast({
+          message: "Pin errato!",
+          duration: 1500,
+          color: "danger",
+          position: "top",
+        });
         setPin("");
       }
     }
@@ -47,7 +58,6 @@ export const LoginPage: React.FC = () => {
                 }
               })}
             </div>
-            {errorPin && <IonNote color="danger">Pin is incorrect!</IonNote>}
           </div>
           <PinKeyboard setPin={setPin} pin={pin} />
         </div>

@@ -159,109 +159,114 @@ export const AddAccountPage = () => {
         scrollEvents={true}
         ref={contentRef}
       >
-        <header>
-          <h1>Aggiungi un Account</h1>
-        </header>
-        <main>
-          <form onSubmit={(e) => handleAdd(e)}>
-            {/* Name Account */}
-            <IonItem>
-              <IonLabel position="stacked">
-                <h1>Name</h1>
-              </IonLabel>
-              <IonInput
-                id="name"
-                placeholder="es. Facebook"
-                value={webSite}
-                onIonChange={(e) => setWebSite(e.detail.value!)}
-                onIonFocus={() => {
-                  setCurrentInputRef("name");
-                }}
-              ></IonInput>
-              {errorWebSite.status && (
-                <IonNote color="danger">{errorWebSite.message}</IonNote>
-              )}
-            </IonItem>
-
-            {/* Link Website */}
-            <IonItem>
-              <IonLabel position="stacked">
-                <h1>Link Web</h1>
-              </IonLabel>
-              <IonInput
-                id="link"
-                placeholder="es. www.facebook.com"
-                value={linkWebsite}
-                onIonChange={(e) => setLinkWebsite(e.detail.value!)}
-                onIonFocus={() => {
-                  setCurrentInputRef("link");
-                }}
-              ></IonInput>
-              {errorLink.status && (
-                <IonNote color="danger">{errorLink.message}</IonNote>
-              )}
-            </IonItem>
-
-            {/* Email or Username */}
-            <IonItem>
-              <IonLabel position="stacked">
-                <h1>Email or Username</h1>
-              </IonLabel>
-              <IonInput
-                id="email"
-                placeholder="Inserisci la tua email o username"
-                value={email}
-                onIonChange={(e) => setEmail(e.detail.value!)}
-                onIonFocus={() => {
-                  setCurrentInputRef("email");
-                }}
-              ></IonInput>
-              {errorEmail.status && (
-                <IonNote color="danger">{errorEmail.message}</IonNote>
-              )}
-            </IonItem>
-
-            <IonItem>
-              <div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
+        <div className="container">
+          <header>
+            <h1>Aggiungi un Account</h1>
+          </header>
+          <main>
+            <form onSubmit={(e) => handleAdd(e)}>
+              {/* Name Account */}
+              <IonItem>
                 <IonLabel position="stacked">
-                  <h1>Password</h1>
+                  <h1>Name</h1>
                 </IonLabel>
-                <a
-                  color="primary"
-                  style={{ fontSize: ".8rem", marginBottom: "-15px" }}
-                  onClick={() => setModalGeneratePassword(true)}
-                >
-                  Genera la Password
-                </a>
-              </div>
-              <IonInput
-                id="password"
-                placeholder="Inserisci o genera la tua password"
-                value={password}
-                onIonChange={(e) => setPassword(e.detail.value!)}
-                onIonFocus={() => {
-                  setCurrentInputRef("password");
-                }}
-              ></IonInput>
-              {errorPassword.status && (
-                <IonNote color="danger">{errorPassword.message}</IonNote>
-              )}
-            </IonItem>
+                <IonInput
+                  id="name"
+                  placeholder="es. Facebook"
+                  value={webSite}
+                  onIonChange={(e) => setWebSite(e.detail.value!)}
+                  onIonFocus={() => {
+                    setCurrentInputRef("name");
+                  }}
+                ></IonInput>
+                {errorWebSite.status && (
+                  <IonNote color="danger">{errorWebSite.message}</IonNote>
+                )}
+              </IonItem>
 
-            <IonButton type="submit">Save</IonButton>
-          </form>
-          <div
-            id="keyboardHeight"
-            style={{ height: `${keyboardHeight}px`, width: "100%" }}
-          ></div>
-        </main>
+              {/* Link Website */}
+              <IonItem>
+                <IonLabel position="stacked">
+                  <h1>Link Web</h1>
+                </IonLabel>
+                <IonInput
+                  id="link"
+                  placeholder="es. www.facebook.com"
+                  value={linkWebsite}
+                  onIonChange={(e) => setLinkWebsite(e.detail.value!)}
+                  onIonFocus={() => {
+                    setCurrentInputRef("link");
+                  }}
+                ></IonInput>
+                {errorLink.status && (
+                  <IonNote color="danger">{errorLink.message}</IonNote>
+                )}
+              </IonItem>
+
+              {/* Email or Username */}
+              <IonItem>
+                <IonLabel position="stacked">
+                  <h1>Email or Username</h1>
+                </IonLabel>
+                <IonInput
+                  id="email"
+                  placeholder="Inserisci la tua email o username"
+                  value={email}
+                  onIonChange={(e) => setEmail(e.detail.value!)}
+                  onIonFocus={() => {
+                    setCurrentInputRef("email");
+                  }}
+                ></IonInput>
+                {errorEmail.status && (
+                  <IonNote color="danger">{errorEmail.message}</IonNote>
+                )}
+              </IonItem>
+
+              <IonItem>
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <IonLabel position="stacked">
+                    <h1>Password</h1>
+                  </IonLabel>
+                  <a
+                    color="primary"
+                    style={{ fontSize: ".8rem", marginBottom: "-15px" }}
+                    onClick={() => setModalGeneratePassword(true)}
+                  >
+                    Genera la Password
+                  </a>
+                </div>
+                <IonInput
+                  id="password"
+                  placeholder="Inserisci o genera la tua password"
+                  value={password}
+                  onIonChange={(e) => setPassword(e.detail.value!)}
+                  onIonFocus={() => {
+                    setCurrentInputRef("password");
+                  }}
+                ></IonInput>
+                {errorPassword.status && (
+                  <IonNote color="danger">{errorPassword.message}</IonNote>
+                )}
+              </IonItem>
+
+              <IonButton type="submit">Save</IonButton>
+            </form>
+            <div
+              id="keyboardHeight"
+              style={{
+                height: `${keyboardHeight}px`,
+                width: "100%",
+              }}
+            ></div>
+          </main>
+        </div>
       </IonContent>
 
       <GeneratePasswordModal
