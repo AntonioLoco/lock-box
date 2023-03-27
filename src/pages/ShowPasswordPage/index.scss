@@ -197,7 +197,7 @@
 
             .navbar{
                 h1{
-                    font-size: 1.5rem;
+                    font-size: 24px;
                 }
 
             }
@@ -205,7 +205,7 @@
 
         main{
             height: 75%;
-            padding: 4em 1em 5em;
+            padding: 75px 12px;
 
             .photo{
                 width: 75px;
@@ -220,14 +220,24 @@
 
             ion-item{
                 h3{
-                    font-size: 1em;
+                    font-size: 16px;
                 }
 
                 p{
                     margin-top: 0;
-                    font-size: .8rem;
+                    font-size: 10px;
                 }
 
+            }
+        }
+
+        ion-fab.edit-button {
+            ion-button {
+                --background: #25262b;
+                font-size: 12px;
+                width: 60%;
+                height: 40px;
+                --border-radius: 20px;
             }
         }
     }
@@ -235,37 +245,42 @@
     .edit-modal{
         header{
             height: 12%;
-            padding-top: 1em;
 
             .navbar{
-                padding: .5em;
                 h1{
-                    font-size: 1.5rem;
+                    font-size: 20px;
                 }
             }
         }
 
         main{
             height: 88%;
-            padding: .5em;
 
             ion-item{
-                margin-bottom: .8em;
+                margin-bottom: 14px;
 
                 ion-label{
                     h1{
-                        font-size: 1em;
+                        font-size: 14px;
                     }
                 }
 
                 ion-input{
-                    font-size: .8em;
+                    font-size: 12px;
                     margin-top: 5px;
                     --padding-top: 5px !important;
                     --padding-bottom: 5px !important;
                     --padding-start: 10px !important;
                     --padding-end: 5px !important;
                 }
+            }
+
+            ion-button[type="submit"] {
+                width: 80%;
+                height: 35px;
+                --border-radius: 15px;
+                --background: #25262B;
+                margin-top: 20px;
             }
         }
     }

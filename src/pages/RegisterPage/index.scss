@@ -58,8 +58,14 @@
 
 @media screen and (max-width: 376px) and (max-height: 668px) {
     .auth-page{
+        .header-page{
+            h1{
+                font-size: 22px;
+            }
+        }
+
         .container{
-            padding: 1em;
+            padding: 10px;
         }
     }
 }
