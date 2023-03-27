@@ -1,5 +1,6 @@
 import "./index.scss";
 import {
+  IonBackButton,
   IonButton,
   IonContent,
   IonItem,
@@ -8,6 +9,7 @@ import {
   IonPage,
   IonSearchbar,
   IonThumbnail,
+  useIonViewDidEnter,
 } from "@ionic/react";
 import { useGlobalContext } from "../../hooks/useGlobalContext";
 import React, { useEffect, useState } from "react";
@@ -31,6 +33,14 @@ export const PasswordsPage: React.FC = () => {
       setSearchAccount(filterAccounts);
     }
   }, [nameFilter]);
+
+  document.addEventListener("ionBackButton", (ev: any) => {
+    console.log(
+      ev.detail.register(10, () => {
+        console.log("chiamato");
+      })
+    );
+  });
 
   return (
     <IonPage>
