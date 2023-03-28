@@ -14,6 +14,7 @@ const useStorage = () => {
     const [loading, setLoading] = useState(true);
     const [pinCode, setPinCode] = useState<string | null>("");
     const [StoreAccounts, setStoreAccounts] = useState<AccountItem[]>([]);
+    // const [categories, setCategories] = useState();
 
     useEffect(() => {
         setLoading(true);
