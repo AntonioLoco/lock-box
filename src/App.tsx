@@ -1,4 +1,4 @@
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, useHistory } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
@@ -28,6 +28,7 @@ setupIonicReact();
 const App: React.FC = () => {
   const { pinCode, loading, StoreAccounts } = useStorage();
   const [accounts, setAccounts] = useState<AccountItem[]>([]);
+  const history = useHistory();
 
   useEffect(() => {
     StatusBar.setBackgroundColor({ color: "#5c60f7" });
@@ -38,6 +39,17 @@ const App: React.FC = () => {
       setAccounts(StoreAccounts);
     }
   }, [loading]);
+
+  document.addEventListener("ionBackButton", (ev: any) => {
+    ev.detail.register(10, () => {
+      if (
+        history.location.pathname !== "/app/passwords" &&
+        history.location.pathname !== "/login"
+      ) {
+        history.goBack();
+      }
+    });
+  });
 
   return (
     <MyGlobalContext.Provider

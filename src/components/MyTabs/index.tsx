@@ -24,6 +24,7 @@ import { AddAccountPage } from "../../pages/AddAccountPage";
 import ShowPasswordPage from "../../pages/ShowPasswordPage";
 
 import { Plugins } from "@capacitor/core";
+import { isPlatform } from "@ionic/react";
 
 export const MyTabs: React.FC = () => {
   const [presentAlert] = useIonAlert();
@@ -63,8 +64,11 @@ export const MyTabs: React.FC = () => {
                   text: "Logout",
                   role: "confirm",
                   handler: () => {
-                    Plugins.App.exitApp();
-                    // history.push("/login");
+                    if (isPlatform("android")) {
+                      Plugins.App.exitApp();
+                    } else {
+                      history.push("/login");
+                    }
                   },
                 },
               ],

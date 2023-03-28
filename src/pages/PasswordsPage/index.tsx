@@ -36,14 +36,6 @@ export const PasswordsPage: React.FC = () => {
     }
   }, [nameFilter]);
 
-  document.addEventListener("ionBackButton", (ev: any) => {
-    ev.detail.register(10, () => {
-      if (history.location.pathname !== "/app/passwords") {
-        history.goBack();
-      }
-    });
-  });
-
   return (
     <IonPage>
       <IonContent className="passwords-page">
