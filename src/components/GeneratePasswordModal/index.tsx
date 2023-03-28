@@ -118,12 +118,10 @@ export const GeneratePasswordModal = ({
   return (
     <IonModal isOpen={isOpen}>
       <IonContent className="modal-generate-password">
-        <IonFab vertical="top" horizontal="start">
+        <header>
           <IonButton size="small" onClick={() => setIsOpen(false)}>
             <IonIcon icon={close} />
           </IonButton>
-        </IonFab>
-        <header>
           <h1>Generate password</h1>
         </header>
         <main>

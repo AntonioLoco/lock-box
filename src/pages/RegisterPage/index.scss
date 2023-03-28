@@ -34,23 +34,21 @@
             text-align: center;
             font-size: 25px;
             color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-            span{
-                margin: 0 10px;
-                position: relative;
 
-                &.letter::after{
-                    content: "";
-                    display: block;
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 100%;
-                    background-color: black;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
+            .underscore{
+                margin: 0 5px;
+            }
+
+            .letter{
+                width: 20px;
+                height: 20px;
+                border-radius: 100%;
+                background-color: black;
+                margin: 0 5px;
             }
         }
     }

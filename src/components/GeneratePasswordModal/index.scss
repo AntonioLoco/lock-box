@@ -7,17 +7,19 @@
         height: 10%;
         padding-top: 25px;
         text-align: center;
+        display: flex;
+        align-items: center;
+
+        ion-button {
+            --background: none;
+            --box-shadow: none;
+            margin-right: 25px;
+        }
 
         h1 {
             font-size: 28px;
             color: white;
             margin: 0;
-        }
-
-        ion-button {
-            --background: none;
-            --box-shadow: none;
-            margin-right: 20px;
         }
     }
 
@@ -80,12 +82,16 @@
             margin-top: 20px;
         }
     }
+}
 
-    ion-fab{
-        ion-button{
-            --background: none;
-            --box-shadow: none;
-        }
+.ios .modal-generate-password{
+    padding-top: 50px;
+    header{
+        height: 15%;
+    }
+
+    main{
+        height: 85%;
     }
 }
 

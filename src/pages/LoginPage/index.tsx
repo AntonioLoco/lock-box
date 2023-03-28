@@ -45,19 +45,17 @@ export const LoginPage: React.FC = () => {
         </div>
         <div className="container">
           <div className="pin">
-            <div>
-              {new Array(5).fill("").map((el, index) => {
-                if (index < pin.length) {
-                  return (
-                    <span className="letter" key={index}>
-                      {pin[index]}
-                    </span>
-                  );
-                } else {
-                  return <span key={index}>_</span>;
-                }
-              })}
-            </div>
+            {new Array(5).fill("").map((el, index) => {
+              if (index < pin.length) {
+                return <div className="letter" key={index}></div>;
+              } else {
+                return (
+                  <div className="underscore" key={index}>
+                    _
+                  </div>
+                );
+              }
+            })}
           </div>
           <PinKeyboard setPin={setPin} pin={pin} />
         </div>

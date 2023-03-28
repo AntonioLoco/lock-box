@@ -35,13 +35,13 @@ export const RegisterPage: React.FC = () => {
           <div className="pin">
             {new Array(5).fill("").map((el, index) => {
               if (index < pin.length) {
-                return (
-                  <span className="letter" key={index}>
-                    {pin[index]}
-                  </span>
-                );
+                return <div className="letter" key={index}></div>;
               } else {
-                return <span key={index}>_</span>;
+                return (
+                  <div className="underscore" key={index}>
+                    _
+                  </div>
+                );
               }
             })}
           </div>
