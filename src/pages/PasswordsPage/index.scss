@@ -30,7 +30,25 @@
             --background: #f4f4f5;
             --box-shadow: none;
             --border-radius: 20px;
-            margin-bottom: 10px;
+        }
+
+        .filter-categories{
+            overflow: auto;
+            white-space: nowrap;
+            padding: 10px;
+
+            ion-chip{
+                --background: none;
+                border: 1px solid #503ce3;
+                --color: #503ce3;
+
+                
+                &.active{
+                    --background: #503ce3!important;
+                    --color: white!important;
+                }
+
+            }
         }
 
         ion-list{
@@ -72,6 +90,14 @@
         width: 100%;
         height: 100%;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img{
+            margin-top: 50px;
+            max-width: 95%;
+        }
     }
 
     .not-found{

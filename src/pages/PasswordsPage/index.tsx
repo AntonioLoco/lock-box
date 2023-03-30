@@ -1,25 +1,44 @@
 import "./index.scss";
 import {
   IonButton,
+  IonChip,
   IonContent,
+  IonIcon,
   IonItem,
   IonLabel,
   IonList,
   IonPage,
   IonSearchbar,
   IonThumbnail,
+  isPlatform,
 } from "@ionic/react";
 import { useGlobalContext } from "../../hooks/useGlobalContext";
 import React, { useEffect, useState } from "react";
-import { AccountItem } from "../../hooks/useStorage";
+import useStorage, { AccountItem } from "../../hooks/useStorage";
+import { chevronForwardOutline } from "ionicons/icons";
+import emptySvg from "../../assets/svg/empty-password.svg";
 
 export const PasswordsPage: React.FC = () => {
   const { AccountsState } = useGlobalContext();
+  const { customCategories } = useStorage();
   const [nameFilter, setNameFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("All");
   const [searchAccount, setSearchAccount] = useState<AccountItem[]>([]);
 
   useEffect(() => {
-    if (nameFilter.length > 0) {
+    if (nameFilter.length > 0 && categoryFilter !== "All") {
+      const filterAccounts = AccountsState.accounts.filter((account) => {
+        if (categoryFilter === account.category) {
+          if (
+            account.name.substring(0, nameFilter.length).toLowerCase() ===
+            nameFilter.toLowerCase()
+          ) {
+            return account;
+          }
+        }
+      });
+      setSearchAccount(filterAccounts);
+    } else if (nameFilter.length > 0) {
       const filterAccounts = AccountsState.accounts.filter((account) => {
         if (
           account.name.substring(0, nameFilter.length).toLowerCase() ===
@@ -31,8 +50,14 @@ export const PasswordsPage: React.FC = () => {
         }
       });
       setSearchAccount(filterAccounts);
+    } else if (categoryFilter !== "All") {
+      const filterAccounts = AccountsState.accounts.filter(
+        (account) => account.category === categoryFilter
+      );
+
+      setSearchAccount(filterAccounts);
     }
-  }, [nameFilter]);
+  }, [nameFilter, categoryFilter]);
 
   return (
     <IonPage>
@@ -45,6 +70,7 @@ export const PasswordsPage: React.FC = () => {
             <div className="empty-password">
               <h1>Nessuna Password!</h1>
               <IonButton routerLink="/app/add-account">Aggiungi</IonButton>
+              <img src={emptySvg} alt="empty password" />
             </div>
           )}
           {AccountsState.accounts.length > 0 && (
@@ -54,11 +80,32 @@ export const PasswordsPage: React.FC = () => {
                 value={nameFilter}
                 onIonChange={(e) => setNameFilter(e.detail.value!)}
               ></IonSearchbar>
+              <div className="filter-categories">
+                <IonChip
+                  className={categoryFilter === "All" ? "active" : ""}
+                  onClick={() => setCategoryFilter("All")}
+                >
+                  All
+                </IonChip>
+                {customCategories.map((category, index) => {
+                  return (
+                    <IonChip
+                      key={index}
+                      className={
+                        categoryFilter === category.category ? "active" : ""
+                      }
+                      onClick={() => setCategoryFilter(category.category)}
+                    >
+                      {category.category}
+                    </IonChip>
+                  );
+                })}
+              </div>
               <IonList>
                 {/* Se c'e un filtro mosto array filtrato */}
-                {nameFilter.length > 0 &&
+                {(nameFilter.length > 0 || categoryFilter !== "All") &&
                   searchAccount.length > 0 &&
-                  searchAccount.map((account, index) => (
+                  searchAccount.map((account) => (
                     <IonItem
                       key={account.id}
                       routerLink={`/app/password/${account.id}`}
@@ -73,13 +120,16 @@ export const PasswordsPage: React.FC = () => {
                         <h2>{account.name}</h2>
                         <h6>{account.app.name}</h6>
                       </IonLabel>
-                      {/* <IonIcon icon={chevronForwardOutline} slot="end" /> */}
+                      {isPlatform("android") && (
+                        <IonIcon icon={chevronForwardOutline} slot="end" />
+                      )}
                     </IonItem>
                   ))}
 
                 {/* Se non ho filtri mostro tutti gli account */}
                 {nameFilter.length === 0 &&
-                  AccountsState.accounts.map((account, index) => (
+                  categoryFilter === "All" &&
+                  AccountsState.accounts.map((account) => (
                     <IonItem
                       key={account.id}
                       routerLink={`/app/password/${account.id}`}
@@ -94,16 +144,19 @@ export const PasswordsPage: React.FC = () => {
                         <h2>{account.name}</h2>
                         <h6>{account.app.name}</h6>
                       </IonLabel>
-                      {/* <IonIcon icon={chevronForwardOutline} slot="end" /> */}
+                      {isPlatform("android") && (
+                        <IonIcon icon={chevronForwardOutline} slot="end" />
+                      )}
                     </IonItem>
                   ))}
 
                 {/* Se ho il filtro ma l'array filtrato è vuoto */}
-                {nameFilter.length > 0 && searchAccount.length === 0 && (
-                  <div className="not-found">
-                    <h1>Nessun risultato trovato!</h1>
-                  </div>
-                )}
+                {(nameFilter.length > 0 || categoryFilter !== "All") &&
+                  searchAccount.length === 0 && (
+                    <div className="not-found">
+                      <h1>Nessun risultato trovato!</h1>
+                    </div>
+                  )}
               </IonList>
             </>
           )}
