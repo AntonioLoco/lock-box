@@ -27,11 +27,11 @@
 
     main{
         width: 100%;
-        height: 85%;
+        min-height: 85%;
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
         background-color: white;
-        padding: 12px;
+        padding: 12px 12px 50px;
         position: relative;
         text-align: center;
 
@@ -48,7 +48,8 @@
                 }
             }
 
-            ion-input{
+            ion-input, 
+            ion-select{
                 font-size: 16px;
                 margin-top: 10px;
                 border: 1.5px solid #25262B;
@@ -58,6 +59,7 @@
                 --padding-start: 10px!important;
                 --padding-end: 10px!important;
             }   
+
         }
 
         ion-button[type="submit"]{
@@ -95,7 +97,8 @@
                     }
                 }
 
-                ion-input{
+                ion-input,
+                ion-select{
                     font-size: 11px;
                     margin-top: 5px;
                     --padding-top: 5px !important;

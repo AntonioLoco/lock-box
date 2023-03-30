@@ -6,8 +6,12 @@ export interface AccountItem {
     id: string,
     email: string,
     password: string,
-    website: string,
-    linkWebsite: string
+    name: string,
+    category: string,
+    app: {
+        name: string,
+        icon: string
+    }
 }
 
 const useStorage = () => {

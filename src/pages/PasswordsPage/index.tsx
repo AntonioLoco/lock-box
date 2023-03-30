@@ -12,19 +12,17 @@ import {
 import { useGlobalContext } from "../../hooks/useGlobalContext";
 import React, { useEffect, useState } from "react";
 import { AccountItem } from "../../hooks/useStorage";
-import { useHistory } from "react-router";
 
 export const PasswordsPage: React.FC = () => {
   const { AccountsState } = useGlobalContext();
   const [nameFilter, setNameFilter] = useState("");
   const [searchAccount, setSearchAccount] = useState<AccountItem[]>([]);
-  const history = useHistory();
 
   useEffect(() => {
     if (nameFilter.length > 0) {
       const filterAccounts = AccountsState.accounts.filter((account) => {
         if (
-          account.website.substring(0, nameFilter.length).toLowerCase() ===
+          account.name.substring(0, nameFilter.length).toLowerCase() ===
           nameFilter.toLowerCase()
         ) {
           return account;
@@ -67,13 +65,13 @@ export const PasswordsPage: React.FC = () => {
                     >
                       <IonThumbnail slot="start">
                         <img
-                          alt={account.website}
-                          src={`https://besticon-demo.herokuapp.com/icon?url=${account.linkWebsite}&size=80..120..200`}
+                          alt={account.app.name}
+                          src={require(`../../assets/icons/${account.app.icon}`)}
                         />
                       </IonThumbnail>
                       <IonLabel>
-                        <h2>{account.website}</h2>
-                        <h6>{account.email}</h6>
+                        <h2>{account.name}</h2>
+                        <h6>{account.app.name}</h6>
                       </IonLabel>
                       {/* <IonIcon icon={chevronForwardOutline} slot="end" /> */}
                     </IonItem>
@@ -88,13 +86,13 @@ export const PasswordsPage: React.FC = () => {
                     >
                       <IonThumbnail slot="start">
                         <img
-                          alt={account.website}
-                          src={`https://besticon-demo.herokuapp.com/icon?url=${account.linkWebsite}&size=80..120..200`}
+                          alt={account.app.name}
+                          src={require(`../../assets/icons/${account.app.icon}`)}
                         />
                       </IonThumbnail>
                       <IonLabel>
-                        <h2>{account.website}</h2>
-                        <h6>{account.email}</h6>
+                        <h2>{account.name}</h2>
+                        <h6>{account.app.name}</h6>
                       </IonLabel>
                       {/* <IonIcon icon={chevronForwardOutline} slot="end" /> */}
                     </IonItem>

@@ -7,6 +7,8 @@ import {
   IonLabel,
   IonNote,
   IonPage,
+  IonSelect,
+  IonSelectOption,
   useIonToast,
 } from "@ionic/react";
 import { useEffect, useRef, useState } from "react";
@@ -16,24 +18,32 @@ import { useHistory } from "react-router";
 import { GeneratePasswordModal } from "../../components/GeneratePasswordModal";
 
 export const AddAccountPage = () => {
-  const { saveStoreAccounts } = useStorage();
+  const { saveStoreAccounts, customCategories } = useStorage();
   const { AccountsState } = useGlobalContext();
   const history = useHistory();
   const [successToast] = useIonToast();
 
+  const [filteredApp, setFilteredApp] = useState<any[]>([]);
+
   //Input form
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [webSite, setWebSite] = useState("");
-  const [linkWebsite, setLinkWebsite] = useState("");
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [app, setApp] = useState({ name: "", icon: "" });
+
   //Error Form
   const [errorEmail, setErrorEmail] = useState({ status: false, message: "" });
-  const [errorWebSite, setErrorWebSite] = useState({
+  const [errorName, setErrorName] = useState({ status: false, message: "" });
+  const [errorPassword, setErrorPassword] = useState({
     status: false,
     message: "",
   });
-  const [errorLink, setErrorLink] = useState({ status: false, message: "" });
-  const [errorPassword, setErrorPassword] = useState({
+  const [errorCategory, setErrorCategory] = useState({
+    status: false,
+    message: "",
+  });
+  const [errorApp, setErrorApp] = useState({
     status: false,
     message: "",
   });
@@ -66,26 +76,43 @@ export const AddAccountPage = () => {
   //Function Add Account
   const handleAdd = async (e: any) => {
     e.preventDefault();
-    setErrorWebSite({ status: false, message: "" });
-    setErrorLink({ status: false, message: "" });
+    setErrorName({ status: false, message: "" });
     setErrorEmail({ status: false, message: "" });
     setErrorPassword({ status: false, message: "" });
+    setErrorCategory({ status: false, message: "" });
+    setErrorApp({ status: false, message: "" });
 
     let errors = 0;
     // Controlli per Valiadazione
-    if (webSite.length === 0) {
+    if (name.length === 0) {
       errors++;
-      setErrorWebSite({
+      setErrorName({
         status: true,
         message: "Il nome dell'account è richiesto!",
       });
     }
 
-    if (linkWebsite.length === 0) {
+    if (category.length === 0) {
       errors++;
-      setErrorLink({
+      setErrorCategory({
         status: true,
-        message: "Il link del sito è richiesto!",
+        message: "Seleziona una categoria!",
+      });
+    }
+
+    if (category.length > 0 && category === "Altro" && app.name.length === 0) {
+      errors++;
+      setErrorApp({
+        status: true,
+        message: "Inserisci il nome dell'app!",
+      });
+    }
+
+    if (category.length > 0 && category !== "Altro" && app.name.length === 0) {
+      errors++;
+      setErrorApp({
+        status: true,
+        message: "Seleziona un app!",
       });
     }
 
@@ -101,7 +128,7 @@ export const AddAccountPage = () => {
       errors++;
       setErrorPassword({
         status: true,
-        message: "La password deve essere di almeno 4 caratteri",
+        message: "La password deve essere di almeno 4 caratteri!",
       });
     }
 
@@ -111,14 +138,15 @@ export const AddAccountPage = () => {
         id: new Date().getTime() + "",
         email,
         password,
-        website: webSite,
-        linkWebsite,
+        name,
+        category,
+        app,
       };
       const updateAccounts = [newAccount, ...AccountsState.accounts];
       AccountsState.setAccounts(updateAccounts);
       history.push("/app/passwords");
       successToast({
-        message: `Account ${webSite} aggiunto!`,
+        message: `Account ${name} aggiunto!`,
         duration: 2000,
         position: "top",
         color: "success",
@@ -126,8 +154,9 @@ export const AddAccountPage = () => {
       await saveStoreAccounts(updateAccounts);
       setEmail("");
       setPassword("");
-      setWebSite("");
-      setLinkWebsite("");
+      setName("");
+      setCategory("");
+      setApp({ name: "", icon: "" });
     }
   };
 
@@ -172,35 +201,107 @@ export const AddAccountPage = () => {
                 <IonInput
                   id="name"
                   placeholder="es. Facebook"
-                  value={webSite}
-                  onIonChange={(e) => setWebSite(e.detail.value!)}
+                  value={name}
+                  onIonChange={(e) => setName(e.detail.value!)}
                   onIonFocus={() => {
                     setCurrentInputRef("name");
                   }}
                 ></IonInput>
-                {errorWebSite.status && (
-                  <IonNote color="danger">{errorWebSite.message}</IonNote>
+                {errorName.status && (
+                  <IonNote color="danger">{errorName.message}</IonNote>
                 )}
               </IonItem>
 
-              {/* Link Website */}
+              {/* Category */}
               <IonItem>
                 <IonLabel position="stacked">
-                  <h1>Link Web</h1>
+                  <h1>Categoria</h1>
                 </IonLabel>
-                <IonInput
-                  id="link"
-                  placeholder="es. www.facebook.com"
-                  value={linkWebsite}
-                  onIonChange={(e) => setLinkWebsite(e.detail.value!)}
-                  onIonFocus={() => {
-                    setCurrentInputRef("link");
+                <IonSelect
+                  aria-label="Category"
+                  interface="action-sheet"
+                  placeholder="Seleziona una categoria"
+                  onIonChange={(e) => {
+                    setCategory(e.detail.value);
+                    if (e.detail.value === "Altro") {
+                      setApp({ name: "", icon: "" });
+                    }
+                    const filteredApps = customCategories.filter((item) => {
+                      if (item.category === e.detail.value) {
+                        return item;
+                      }
+                    });
+                    setFilteredApp(filteredApps);
                   }}
-                ></IonInput>
-                {errorLink.status && (
-                  <IonNote color="danger">{errorLink.message}</IonNote>
+                >
+                  {customCategories.map((item, index) => {
+                    return (
+                      <IonSelectOption key={index} value={item.category}>
+                        {item.category}
+                      </IonSelectOption>
+                    );
+                  })}
+                </IonSelect>
+                {errorCategory.status && (
+                  <IonNote color="danger">{errorCategory.message}</IonNote>
                 )}
               </IonItem>
+
+              {/* App */}
+              {category.length > 0 && category !== "Altro" && (
+                <IonItem>
+                  <IonLabel position="stacked">
+                    <h1>Applicazione</h1>
+                  </IonLabel>
+                  <IonSelect
+                    aria-label="app"
+                    interface="action-sheet"
+                    placeholder="Seleziona un app"
+                    onIonChange={(e) => {
+                      const [name, icon] = e.detail.value.split(",");
+                      setApp({
+                        name: name,
+                        icon: icon,
+                      });
+                    }}
+                  >
+                    {filteredApp[0].apps.map((item: any, index: number) => (
+                      <IonSelectOption
+                        key={index}
+                        value={`${item.name},${item.icon}`}
+                      >
+                        {item.name}
+                      </IonSelectOption>
+                    ))}
+                  </IonSelect>
+                  {errorApp.status && (
+                    <IonNote color="danger">{errorApp.message}</IonNote>
+                  )}
+                </IonItem>
+              )}
+
+              {/* Custom App */}
+              {category.length > 0 && category === "Altro" && (
+                <IonItem>
+                  <IonLabel position="stacked">
+                    <h1>Nome App</h1>
+                  </IonLabel>
+                  <IonInput
+                    id="app"
+                    placeholder="Inserisci il nome dell'app"
+                    value={app.name}
+                    onIonChange={(e) =>
+                      setApp({ name: e.detail.value!, icon: "default.png" })
+                    }
+                    onIonFocus={() => {
+                      setCurrentInputRef("app");
+                    }}
+                  ></IonInput>
+                  {errorApp.status && (
+                    <IonNote color="danger">{errorApp.message}</IonNote>
+                  )}
+                </IonItem>
+              )}
 
               {/* Email or Username */}
               <IonItem>
@@ -220,7 +321,7 @@ export const AddAccountPage = () => {
                   <IonNote color="danger">{errorEmail.message}</IonNote>
                 )}
               </IonItem>
-
+              {/* Password */}
               <IonItem>
                 <div
                   style={{
@@ -254,7 +355,6 @@ export const AddAccountPage = () => {
                   <IonNote color="danger">{errorPassword.message}</IonNote>
                 )}
               </IonItem>
-
               <IonButton type="submit">Save</IonButton>
             </form>
             <div

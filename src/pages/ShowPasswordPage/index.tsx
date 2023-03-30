@@ -53,18 +53,18 @@ const ShowPasswordPage: React.FC = () => {
   const [modalGeneratePassword, setModalGeneratePassword] = useState(false);
 
   //Input Modal
-  const [website, setWebsite] = useState(accountShow[0].website);
-  const [linkWebsite, setLinkWebsite] = useState(accountShow[0].linkWebsite);
+  const [name, setName] = useState(accountShow[0].name);
   const [email, setEmail] = useState(accountShow[0].email);
   const [password, setPassword] = useState(accountShow[0].password);
+  const [category, setCategory] = useState(accountShow[0].category);
+  const [app, setApp] = useState(accountShow[0].app);
 
   //Error Form
   const [errorEmail, setErrorEmail] = useState({ status: false, message: "" });
-  const [errorWebSite, setErrorWebSite] = useState({
+  const [errorName, setErrorName] = useState({
     status: false,
     message: "",
   });
-  const [errorLink, setErrorLink] = useState({ status: false, message: "" });
   const [errorPassword, setErrorPassword] = useState({
     status: false,
     message: "",
@@ -152,26 +152,17 @@ const ShowPasswordPage: React.FC = () => {
 
   const handleEditPassword = async (e: any, id: string, name: string) => {
     e.preventDefault();
-    setErrorWebSite({ status: false, message: "" });
-    setErrorLink({ status: false, message: "" });
+    setErrorName({ status: false, message: "" });
     setErrorEmail({ status: false, message: "" });
     setErrorPassword({ status: false, message: "" });
 
     let errors = 0;
     // Controlli per Valiadazione
-    if (website.length === 0) {
+    if (name.length === 0) {
       errors++;
-      setErrorWebSite({
+      setErrorName({
         status: true,
         message: "Il nome dell'account è richiesto!",
-      });
-    }
-
-    if (linkWebsite.length === 0) {
-      errors++;
-      setErrorLink({
-        status: true,
-        message: "Il link del sito è richiesto!",
       });
     }
 
@@ -196,8 +187,9 @@ const ShowPasswordPage: React.FC = () => {
         id,
         email,
         password,
-        website,
-        linkWebsite,
+        name,
+        category: category,
+        app: app,
       };
 
       const oldAccounts = AccountsState.accounts.filter(
@@ -229,12 +221,12 @@ const ShowPasswordPage: React.FC = () => {
                 <IonButton size="small" onClick={() => history.goBack()}>
                   <IonIcon icon={chevronBackOutline} />
                 </IonButton>
-                <h1>{accountShow[0].website}</h1>
+                <h1>{accountShow[0].name}</h1>
                 <IonButton
                   size="small"
                   onClick={() => {
                     deleteAlert({
-                      header: `Sei sicuro di voler eliminare l'account ${accountShow[0].website} ?`,
+                      header: `Sei sicuro di voler eliminare l'account ${accountShow[0].name} ?`,
                       buttons: [
                         {
                           text: "Cancel",
@@ -246,7 +238,7 @@ const ShowPasswordPage: React.FC = () => {
                           handler: () => {
                             deletePassword(
                               accountShow[0].id,
-                              accountShow[0].website
+                              accountShow[0].name
                             );
                           },
                         },
@@ -261,15 +253,16 @@ const ShowPasswordPage: React.FC = () => {
             <main>
               <div className="photo">
                 <img
-                  src={`https://besticon-demo.herokuapp.com/icon?url=${accountShow[0].linkWebsite}&size=80..120..200`}
+                  src={require(`../../assets/icons/${accountShow[0].app.icon}`)}
+                  alt={accountShow[0].app.name}
                 />
               </div>
 
               <IonList>
                 <IonItem>
                   <div className="card">
-                    <h3>Sito Web</h3>
-                    <p>{accountShow[0].linkWebsite}</p>
+                    <h3>App</h3>
+                    <p>{accountShow[0].app.name}</p>
                   </div>
                 </IonItem>
                 <IonItem>
@@ -345,7 +338,7 @@ const ShowPasswordPage: React.FC = () => {
                         handleEditPassword(
                           e,
                           accountShow[0].id,
-                          accountShow[0].website
+                          accountShow[0].name
                         )
                       }
                     >
@@ -356,34 +349,14 @@ const ShowPasswordPage: React.FC = () => {
                         </IonLabel>
                         <IonInput
                           id="name"
-                          value={website}
-                          onIonChange={(e) => setWebsite(e.detail.value!)}
+                          value={name}
+                          onIonChange={(e) => setName(e.detail.value!)}
                           onIonFocus={() => {
                             setCurrentInputRef("name");
                           }}
                         ></IonInput>
-                        {errorWebSite.status && (
-                          <IonNote color="danger">
-                            {errorWebSite.message}
-                          </IonNote>
-                        )}
-                      </IonItem>
-
-                      {/* Link Website */}
-                      <IonItem>
-                        <IonLabel position="stacked">
-                          <h1>Link Web</h1>
-                        </IonLabel>
-                        <IonInput
-                          id="link"
-                          value={linkWebsite}
-                          onIonChange={(e) => setLinkWebsite(e.detail.value!)}
-                          onIonFocus={() => {
-                            setCurrentInputRef("link");
-                          }}
-                        ></IonInput>
-                        {errorLink.status && (
-                          <IonNote color="danger">{errorLink.message}</IonNote>
+                        {errorName.status && (
+                          <IonNote color="danger">{errorName.message}</IonNote>
                         )}
                       </IonItem>
 
