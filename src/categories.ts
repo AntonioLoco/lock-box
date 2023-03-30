@@ -1,4 +1,14 @@
-export const categories = [
+export interface app{
+    name: string, 
+    icon: string
+}
+
+export interface category {
+    category: string,
+    apps: app[]
+}
+
+export const categories: category[] = [
     {
         category: "Social Network",
         apps: [
@@ -12,7 +22,6 @@ export const categories = [
             { name: 'TikTok', icon: 'tiktok.svg' },
             { name: 'Reddit', icon: 'reddit.svg' },
             { name: 'Discord', icon: 'discord.svg' },
-            { name: 'Tumblr', icon: 'tumblr.svg' },
             { name: 'BeReal', icon: 'bereal.svg' },
         ]
     },
@@ -23,13 +32,11 @@ export const categories = [
             { name: 'Dazn', icon: 'dazn.svg' },
             { name: 'Twitch', icon: 'twitch.svg' },
             { name: 'Spotify', icon: 'spotify.svg' },
-            { name: 'Disnay+', icon: 'disney.svg' },
+            { name: 'Disney+', icon: 'disney.svg' },
             { name: 'Itunes', icon: 'itunes.svg' },
             { name: 'Prime Video', icon: 'prime_video.svg' },
             { name: 'Amazon Music', icon: 'amazon_music.svg' },
-            { name: 'Tidal', icon: 'tidal.svg' },
             { name: 'Rai Play', icon: 'rai_play.svg' },
-            { name: 'Pluto TV', icon: 'pluto_tv.svg' },
             { name: 'Mediset Infinity', icon: 'mediaset_infinity.svg' },
             { name: 'Sky', icon: 'sky.svg' },
             { name: 'Viki Rakuten', icon: 'viki.svg' },
@@ -39,7 +46,7 @@ export const categories = [
     },
     {
         category: "Shopping",
-        apps: [//Icone da fare
+        apps: [
             {name: "Shein", icon: "shein.svg"},
             {name: "Vinted", icon: "vinted.svg"},
             {name: "Amazon", icon: "amazon.svg"},
@@ -62,7 +69,6 @@ export const categories = [
             {name: "Microsoft", icon: "microsoft.svg"},
             {name: "Apple", icon: "apple.svg"},
             {name: "Libero", icon: "libero.svg"},
-            {name: "Xiaomi", icon: "xiaomi.svg"},
             {name: "Zoom", icon: "zoom.svg"},
             {name: "Trello", icon: "trello.svg"},
             {name: "Slack", icon: "slack.svg"},
@@ -94,8 +100,7 @@ export const categories = [
             {name: "Ho", icon: "ho.svg"},
             {name: "Nord VPN", icon: "nordvpn.svg"},
             {name: "Very Mobile", icon: "very_mobile.svg"},
-            {name: "Ookla Speedtest", icon: "ookla.svg"},
-            {name: "Tim", icon: "tim.svg"},
+            {name: "My Tim", icon: "tim.svg"},
             {name: "Kena Mobile", icon: "kena.svg"},
         ]
     },
@@ -111,7 +116,7 @@ export const categories = [
             {name: "Revolout", icon: "revoulut.svg"},
             {name: "Generali", icon: "generali.svg"},
             {name: "BuddyBank", icon: "buddybank.svg"},
-            {name: "Banca MPS", icon: "bancamps.svg"},
+            {name: "Banca MPS", icon: "bancaMPS.svg"},
             {name: "ING", icon: "ing.svg"},
             {name: "Crypto", icon: "crypto.svg"},
             {name: "BLN", icon: "bln.svg"},
@@ -148,5 +153,9 @@ export const categories = [
             {name: "KFC", icon: "kfc.svg"},
             {name: "Glovo", icon: "glovo.svg"},
         ]
+    }, 
+    {
+        category: "Altro",
+        apps: []
     }
 ]

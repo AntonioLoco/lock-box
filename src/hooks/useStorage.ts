@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Storage } from "@ionic/storage";
+import { categories, category } from "../categories";
 
 export interface AccountItem {
     id: string,
@@ -14,7 +15,7 @@ const useStorage = () => {
     const [loading, setLoading] = useState(true);
     const [pinCode, setPinCode] = useState<string | null>("");
     const [StoreAccounts, setStoreAccounts] = useState<AccountItem[]>([]);
-    // const [categories, setCategories] = useState();
+    const [customCategories, setCustomCategories] = useState<category[]>([]);
 
     useEffect(() => {
         setLoading(true);
@@ -30,6 +31,9 @@ const useStorage = () => {
 
             const storedAccounts = await store.get("accounts") || [];
             setStoreAccounts(storedAccounts);
+
+            const storedCategories = await store.get("categories") || categories;
+            setCustomCategories(storedCategories);
 
             setLoading(false);
         }
@@ -49,7 +53,14 @@ const useStorage = () => {
             store?.set("accounts", updatedAccounts);
         }
 
-        return { loading, pinCode, createPinCode, StoreAccounts, saveStoreAccounts};
+        const addCustomCategory = async (name: string) => {
+            const newCategories = customCategories;
+            newCategories[9].apps.push({name, icon: "custom"});
+            setCustomCategories(newCategories);
+            store?.set("categories", newCategories);
+        }
+
+        return { loading, pinCode, createPinCode, StoreAccounts, saveStoreAccounts, customCategories, addCustomCategory};
 }
 
 export default useStorage
