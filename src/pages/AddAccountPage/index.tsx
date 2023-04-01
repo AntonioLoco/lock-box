@@ -180,6 +180,7 @@ export const AddAccountPage = () => {
       window.removeEventListener("keyboardDidHide", onKeyboardHide);
     };
   }, [currentInput]);
+
   return (
     <IonPage>
       <IonContent
@@ -233,6 +234,7 @@ export const AddAccountPage = () => {
                     });
                     setFilteredApp(filteredApps);
                   }}
+                  value={category}
                 >
                   {customCategories.map((item, index) => {
                     return (

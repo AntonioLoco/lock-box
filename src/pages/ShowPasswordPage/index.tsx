@@ -150,7 +150,7 @@ const ShowPasswordPage: React.FC = () => {
     });
   };
 
-  const handleEditPassword = async (e: any, id: string, name: string) => {
+  const handleEditPassword = async (e: any, id: string) => {
     e.preventDefault();
     setErrorName({ status: false, message: "" });
     setErrorEmail({ status: false, message: "" });
@@ -221,7 +221,7 @@ const ShowPasswordPage: React.FC = () => {
                 <IonButton size="small" onClick={() => history.goBack()}>
                   <IonIcon icon={chevronBackOutline} />
                 </IonButton>
-                <h1>{accountShow[0].name}</h1>
+                <h1>{accountShow[0].app.name}</h1>
                 <IonButton
                   size="small"
                   onClick={() => {
@@ -261,8 +261,8 @@ const ShowPasswordPage: React.FC = () => {
               <IonList>
                 <IonItem>
                   <div className="card">
-                    <h3>App</h3>
-                    <p>{accountShow[0].app.name}</p>
+                    <h3>Name Account</h3>
+                    <p>{accountShow[0].name}</p>
                   </div>
                 </IonItem>
                 <IonItem>
@@ -334,13 +334,7 @@ const ShowPasswordPage: React.FC = () => {
                   </header>
                   <main>
                     <form
-                      onSubmit={(e) =>
-                        handleEditPassword(
-                          e,
-                          accountShow[0].id,
-                          accountShow[0].name
-                        )
-                      }
+                      onSubmit={(e) => handleEditPassword(e, accountShow[0].id)}
                     >
                       {/* Name Account */}
                       <IonItem>

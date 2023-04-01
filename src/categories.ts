@@ -74,7 +74,7 @@ export const categories: category[] = [
             {name: "Slack", icon: "slack.png"},
             { name: 'Skype', icon: 'skype.png' },
             {name: "Canva", icon: "canva.png"},
-            {name: "GitHub", icon: "gihub.png"},
+            {name: "GitHub", icon: "github.png"},
             {name: "PicsArt", icon: "picsart.png"},
             {name: "Adobe", icon: "adobe.png"},
         ]
