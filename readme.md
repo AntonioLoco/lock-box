@@ -13,8 +13,3 @@
 <h4>Link Download:</h4>
 <a href="./readme/lock-box.apk" download="Lock-Box">Download Android</a> <br>
 <a href="./readme/lock-box-ios.ipa" download="Lock-Box">Download IOS</a>
-
-<h4><strong>Flusso di navigazione:</strong></h4>
-<video width="500" height="450" autoplay muted loop>
-  <source src="./readme/flow.MP4" type="video/mp4">
-</video>
